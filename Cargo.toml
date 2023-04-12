@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+  "tlmcmddb",
+  "tlmcmddb-csv",
+  "tlmcmddb-cli",
+]

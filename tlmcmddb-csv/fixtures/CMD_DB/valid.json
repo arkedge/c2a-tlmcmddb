@@ -1,0 +1,2736 @@
+{
+  "entries": [
+    {
+      "type": "COMMENT",
+      "text": "*,Cmd_EXAMPLE,OBC,,2,uint32_t,address,int32_t,time [ms],,,,,,,,,,,例,引数の説明と単位を書くこと！（例：time [ms]）"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* C2A_CORE,基幹機能コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_NOP",
+      "target": "OBC",
+      "code": 0,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ダミーコマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_SET_TIME",
+      "target": "OBC",
+      "code": 1,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "TI"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "MOBC時刻設定コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_UPDATE_UNIXTIME",
+      "target": "OBC",
+      "code": 2,
+      "parameters": [
+        {
+          "data_type": "double",
+          "description": "unixtime"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "total_cycle"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "step"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "MOBC UNIXTIME修正コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_SET_UTL_UNIXTIME_EPOCH",
+      "target": "OBC",
+      "code": 3,
+      "parameters": [
+        {
+          "data_type": "double",
+          "description": "ult_unixtime_epoch"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "UTL_cmdで用いるunixtimeの紀元を変更する",
+      "note": "utl_unixtime_epoch [s]"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_SET_CYCLE_CORRECTION",
+      "target": "OBC",
+      "code": 4,
+      "parameters": [
+        {
+          "data_type": "double",
+          "description": "cycle_correction"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CYCLES_PER_SECの補正倍率を変更する, 初期値は1.0",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_RESET_CYCLE_CORRECTION",
+      "target": "OBC",
+      "code": 5,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CYCLES_PER_SECの補正倍率を1.0に初期化する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TMGR_CLEAR_UNIXTIME_INFO",
+      "target": "OBC",
+      "code": 6,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "unixtime_info_ を初期化する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AM_REGISTER_APP",
+      "target": "OBC",
+      "code": 7,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "app_id"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "init_ptr"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "entry_ptr"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アプリ登録コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AM_INITIALIZE_APP",
+      "target": "OBC",
+      "code": 8,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "app_id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アプリ初期化コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AM_EXECUTE_APP",
+      "target": "OBC",
+      "code": 9,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "app_id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アプリ実行コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AM_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 10,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ生成用ページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AM_CLEAR_APP_INFO",
+      "target": "OBC",
+      "code": 11,
+      "parameters": [],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "アプリ実行時間計測の初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MM_SET_MODE_LIST",
+      "target": "OBC",
+      "code": 12,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "mode"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "モード定義リスト設定コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MM_SET_TRANSITION_TABLE",
+      "target": "OBC",
+      "code": 13,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "from_mode"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "to_mode"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "モード遷移定義テーブル書き換えコマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MM_START_TRANSITION",
+      "target": "OBC",
+      "code": 14,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "to_mode"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "モード遷移開始コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MM_FINISH_TRANSITION",
+      "target": "OBC",
+      "code": 15,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "モード遷移終了通知コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MM_UPDATE_TRANSITION_TABLE_FOR_TLM",
+      "target": "OBC",
+      "code": 16,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "モードのTLMテーブル情報更新",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TDSP_SET_TASK_LIST",
+      "target": "OBC",
+      "code": 17,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "タスクリスト設定コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_CLEAR_ALL_TIMELINE",
+      "target": "OBC",
+      "code": 18,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        }
+      ],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "全TLC登録解除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_CLEAR_TIMELINE_AT",
+      "target": "OBC",
+      "code": 19,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "TI"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TI指定TLC登録解除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_DEPLOY_BLOCK",
+      "target": "OBC",
+      "code": 20,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC展開 ",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_CLEAR_ERR_LOG",
+      "target": "OBC",
+      "code": 21,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "最新のコマンド実行異常記録をクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_SET_SOE_FLAG",
+      "target": "OBC",
+      "code": 22,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "異常時実行停止機能設定(ライン番号, フラグ)",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_SET_LOUT_FLAG",
+      "target": "OBC",
+      "code": 23,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "実行停止機能設定(ライン番号, フラグ)",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_SET_ID_FOR_TLM",
+      "target": "OBC",
+      "code": 24,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLCD_ID"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメで降ろすTL_IDの設定とTLテレメの更新",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLCD_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 25,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ生成用ページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_GENERATE_TLM",
+      "target": "OBC",
+      "code": 26,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "category"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "TLM_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "送出回数"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLMパケット生成",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,BCTコマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCT_CLEAR_BLOCK",
+      "target": "OBC",
+      "code": 27,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC登録解除コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCT_SET_BLOCK_POSITION",
+      "target": "OBC",
+      "code": 28,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "cmd_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC操作ポインタ設定コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCT_COPY_BCT",
+      "target": "OBC",
+      "code": 29,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "dst_bc_index"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "src_bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BCT の内容を別の場所にコピー",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCT_OVERWRITE_CMD",
+      "target": "OBC",
+      "code": 30,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "CMD_CODE"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "TI"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "pos.block"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "pos.cmd"
+        },
+        {
+          "data_type": "raw",
+          "description": "cmd_param (big endian)"
+        }
+      ],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "BCTの内容を上書き",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCT_FILL_NOP",
+      "target": "OBC",
+      "code": 31,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメ運用時の10個BCをNOP埋めする．（NOP個数）",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,BCEコマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_ACTIVATE_BLOCK",
+      "target": "OBC",
+      "code": 32,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC有効化コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_ACTIVATE_BLOCK_BY_ID",
+      "target": "OBC",
+      "code": 33,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BCを（無条件に）有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_INACTIVATE_BLOCK_BY_ID",
+      "target": "OBC",
+      "code": 34,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BCを（無条件に）無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_ROTATE_BLOCK",
+      "target": "OBC",
+      "code": 35,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC回転コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_COMBINE_BLOCK",
+      "target": "OBC",
+      "code": 36,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BLC融合コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_TIMELIMIT_COMBINE_BLOCK",
+      "target": "OBC",
+      "code": 37,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "limit_step"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "時間制限付きBLC融合コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_RESET_ROTATOR_INFO",
+      "target": "OBC",
+      "code": 38,
+      "parameters": [],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "カウンタ類リセット",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_RESET_COMBINER_INFO",
+      "target": "OBC",
+      "code": 39,
+      "parameters": [],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "カウンタ類リセット",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_BCE_SET_ROTATE_INTERVAL",
+      "target": "OBC",
+      "code": 40,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint16_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "BC回転時の回転間隔周期を設定する",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,GSCDコマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_GSCD_CLEAR_ERR_LOG",
+      "target": "OBC",
+      "code": 41,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "最新のコマンド実行異常記録をクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,RTCDコマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_RTCD_CLEAR_ALL_REALTIME",
+      "target": "OBC",
+      "code": 42,
+      "parameters": [],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "全RTC登録解除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_RTCD_CLEAR_ERR_LOG",
+      "target": "OBC",
+      "code": 43,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "最新のコマンド実行異常記録をクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,メモリ操作コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MEM_SET_REGION",
+      "target": "OBC",
+      "code": 44,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "始点アドレス"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "終点アドレス"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "始点アドレスと終点アドレスを指定する",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "*,Cmd_MEM_DUMP_REGION_SEQ,OBC,,2,uint8_t,category,uint8_t,送出回数,,,,,,,,,,,カテゴリと送信回数を指定する,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "*,Cmd_MEM_DUMP_REGION_RND,OBC,,3,uint8_t,category,uint8_t,送出回数,uint16_t,ダンプ位置,,,,,,,,,カテゴリと送信回数,ダンプ位置を指定する,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "*,Cmd_MEM_DUMP_SINGLE,OBC,,3,uint8_t,category,uint8_t,送出回数,uint32_t,ダンプ位置,,,,,,,,,カテゴリと送信回数,ダンプ位置を指定する,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MEM_LOAD",
+      "target": "OBC",
+      "code": 45,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "開始アドレス"
+        },
+        {
+          "data_type": "raw",
+          "description": "HEXBINARY"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "開始アドレス、データを指定",
+      "note": "第2パラメータの指定は仮設定"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MEM_SET_DESTINATION",
+      "target": "OBC",
+      "code": 46,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "コピー先アドレス"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "コピー先設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_MEM_COPY_REGION_SEQ",
+      "target": "OBC",
+      "code": 47,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "コピー幅"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "領域コピー",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,AnomalyLogger用,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_ADD_ANOMALY",
+      "target": "OBC",
+      "code": 48,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "local"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アノマリーコード(group, local)を発生させる",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_CLEAR_LIST",
+      "target": "OBC",
+      "code": 49,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "AnomalyListをクリアする",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 50,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ生成用ページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_INIT_LOGGING_ENA_FLAG",
+      "target": "OBC",
+      "code": 51,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ロギングのフラグを初期化（全有効化）",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_ENABLE_LOGGING",
+      "target": "OBC",
+      "code": 52,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ロギングを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_DISABLE_LOGGING",
+      "target": "OBC",
+      "code": 53,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ロギングを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AL_SET_THRES_OF_NEARLY_FULL",
+      "target": "OBC",
+      "code": 54,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "AL_NEARLY_FULLアノマリを出すしきい値設定",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,AnomalyHandler用,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AH_REGISTER_RULE",
+      "target": "OBC",
+      "code": 55,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "id"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "group"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "local"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "cond"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "threshold"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "bc_index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "AHパラメタを設定する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AH_ACTIVATE_RULE",
+      "target": "OBC",
+      "code": 56,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "idで指定したルールを有効化する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AH_INACTIVATE_RULE",
+      "target": "OBC",
+      "code": 57,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "idで指定したルールを無効化する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AH_CLEAR_LOG",
+      "target": "OBC",
+      "code": 58,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アノマリ記録と関連情報を初期化する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AH_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 59,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ生成用ページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AHRES_LOG_CLEAR",
+      "target": "OBC",
+      "code": 60,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アノマリ対処ログをクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_AHRES_LOG_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 61,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "アノマリ対処ログテレメトリ生成用ページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,EventLogger,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_INIT",
+      "target": "OBC",
+      "code": 62,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EL初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLEAR_LOG_ALL",
+      "target": "OBC",
+      "code": 63,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "全ログ削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLEAR_LOG_BY_ERR_LEVEL",
+      "target": "OBC",
+      "code": 64,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "エラーレベル指定ログ削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLEAR_STATISTICS",
+      "target": "OBC",
+      "code": 65,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "統計情報削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLEAR_TLOG",
+      "target": "OBC",
+      "code": 66,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLog削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLEAR_CLOG",
+      "target": "OBC",
+      "code": 67,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CLog削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_RECORD_EVENT",
+      "target": "OBC",
+      "code": 68,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "local"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "note"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "イベント記録",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_TLOG_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 69,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLogのダウンリンクテレメ設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_CLOG_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 70,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CLogのダウンリンクテレメ設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_INIT_LOGGING_SETTINGS",
+      "target": "OBC",
+      "code": 71,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ログ設定を初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_ENABLE_LOGGING",
+      "target": "OBC",
+      "code": 72,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ロギングを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_DISABLE_LOGGING",
+      "target": "OBC",
+      "code": 73,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ロギングを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_ENABLE_LOGGING_ALL",
+      "target": "OBC",
+      "code": 74,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "すべてのロギングを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_DISABLE_LOGGING_ALL",
+      "target": "OBC",
+      "code": 75,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "すべてのロギングを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_ENABLE_TLOG_OVERWRITE",
+      "target": "OBC",
+      "code": 76,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLogのログ上書きを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_DISABLE_TLOG_OVERWRITE",
+      "target": "OBC",
+      "code": 77,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLogのログ上書きを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_ENABLE_TLOG_OVERWRITE_ALL",
+      "target": "OBC",
+      "code": 78,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "すべてのTLogのログ上書きを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EL_DISABLE_TLOG_OVERWRITE_ALL",
+      "target": "OBC",
+      "code": 79,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "すべてのTLogのログ上書きを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,EventHandler,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INIT",
+      "target": "OBC",
+      "code": 80,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHの初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_CLEAR_ALL_RULE",
+      "target": "OBC",
+      "code": 81,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHのすべてのルールをクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_LOAD_DEFAULT_RULE",
+      "target": "OBC",
+      "code": 82,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHのデフォルトルールを読み込み",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_REGISTER_RULE_EVENT_PARAM",
+      "target": "OBC",
+      "code": 83,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "event group"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "event local"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "event err level"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "should_match_err_level"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "deploy bc index"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "登録するEHルールのイベントパラメータを設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_REGISTER_RULE_CONDITION_PARAM",
+      "target": "OBC",
+      "code": 84,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "condition type"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "count_threshold"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "time_threshold [ms]"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "is_active"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "登録するEHルールの対応条件パラメタを設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_REGISTER_RULE",
+      "target": "OBC",
+      "code": 85,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "設定したパラメタでEHルールを登録",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_DELETE_RULE",
+      "target": "OBC",
+      "code": 86,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを削除",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INIT_RULE",
+      "target": "OBC",
+      "code": 87,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを初期化（ルールを有効化し，ルールカウンタも初期化）",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INIT_RULE_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 88,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを初期化（ルールを有効化し，ルールカウンタも初期化）（多段EH対応用）",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_ACTIVATE_RULE",
+      "target": "OBC",
+      "code": 89,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INACTIVATE_RULE",
+      "target": "OBC",
+      "code": 90,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_ACTIVATE_RULE_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 91,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを有効化（多段EH対応用）",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INACTIVATE_RULE_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 92,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "指定したルールを無効化（多段EH対応用）",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_RULE_COUNTER",
+      "target": "OBC",
+      "code": 93,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        },
+        {
+          "data_type": "uint16_t",
+          "description": "counter"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EH_Rule の counter をセット",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_CLEAR_RULE_COUNTER",
+      "target": "OBC",
+      "code": 94,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EH_Rule の counter を0 クリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_CLEAR_RULE_COUNTER_BY_EVENT",
+      "target": "OBC",
+      "code": 95,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "local"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "err_level"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EH_Rule の counter を EL_Event 指定で 0 クリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_CLEAR_LOG",
+      "target": "OBC",
+      "code": 96,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHの対応ログをクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_MAX_RESPONSE_NUM",
+      "target": "OBC",
+      "code": 97,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "max_response_num"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "一度のEH実行で対応するイベントの最大数を設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_MAX_CHECK_EVENT_NUM",
+      "target": "OBC",
+      "code": 98,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "max_check_event_num"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "一度のEH実行でチェックするイベントの最大数を設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_MAX_MULTI_LEVEL_NUM",
+      "target": "OBC",
+      "code": 99,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "max_multi_level_num"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "設定可能な最大段数を設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_PAGE_OF_RULE_TABLE_FOR_TLM",
+      "target": "OBC",
+      "code": 100,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHルールテーブルのテレメページの設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_PAGE_OF_RULE_SORTED_IDX_FOR_TLM",
+      "target": "OBC",
+      "code": 101,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHルールのソート済みテーブルのテレメページの設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_PAGE_OF_LOG_TABLE_FOR_TLM",
+      "target": "OBC",
+      "code": 102,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHログテーブルのテレメページの設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_SET_TARGET_ID_OF_RULE_TABLE_FOR_TLM",
+      "target": "OBC",
+      "code": 103,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "rule id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHテレメに表示するルールのID設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_MATCH_EVENT_COUNTER_TO_EL",
+      "target": "OBC",
+      "code": 104,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "イベント発生を検知するためのEHカウンタをELカウンタに強制定期に合わせる",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INIT_RULE_BY_EVENT_GROUP",
+      "target": "OBC",
+      "code": 105,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_INIT_RULE の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INIT_RULE_BY_EVENT_GROUP_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 106,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_INIT_RULE_FOR_MULTI_LEVEL の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_ACTIVATE_RULE_BY_EVENT_GROUP",
+      "target": "OBC",
+      "code": 107,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_ACTIVATE_RULE の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INACTIVATE_RULE_BY_EVENT_GROUP",
+      "target": "OBC",
+      "code": 108,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_INACTIVATE_RULE の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_ACTIVATE_RULE_BY_EVENT_GROUP_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 109,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_ACTIVATE_RULE_FOR_MULTI_LEVEL の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EH_INACTIVATE_RULE_BY_EVENT_GROUP_FOR_MULTI_LEVEL",
+      "target": "OBC",
+      "code": 110,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "group"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "Cmd_EH_INACTIVATE_RULE_FOR_MULTI_LEVEL の by_event_group コマンド．想定外のものまで操作されないか注意すること",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,EventUtility,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EVENT_UTIL_ENABLE_EH_EXEC",
+      "target": "OBC",
+      "code": 111,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHの実行を有効に",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EVENT_UTIL_DISABLE_EH_EXEC",
+      "target": "OBC",
+      "code": 112,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHの実行を無効に",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_EVENT_UTIL_EXEC_EH",
+      "target": "OBC",
+      "code": 113,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "EHを単発で実行",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,Telemetry Frame, Command Analyze,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TF_INIT",
+      "target": "OBC",
+      "code": 114,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TFの初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_CA_INIT",
+      "target": "OBC",
+      "code": 115,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CAの初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TF_REGISTER_TLM",
+      "target": "OBC",
+      "code": 116,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "index"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "tlm_func"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ登録コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_CA_REGISTER_CMD",
+      "target": "OBC",
+      "code": 117,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "index"
+        },
+        {
+          "data_type": "uint32_t",
+          "description": "cmd_func"
+        },
+        {
+          "data_type": "raw",
+          "description": "param_info"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "コマンド登録コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TF_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 118,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "テレメトリ定義テーブルページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_CA_SET_PAGE_FOR_TLM",
+      "target": "OBC",
+      "code": 119,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "page_no"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "コマンド定義テーブルページ番号設定",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,Tlm Manager コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_INIT",
+      "target": "OBC",
+      "code": 120,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_INIT_MASTER_BC",
+      "target": "OBC",
+      "code": 121,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "master bc の初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_CLEAR_HK_TLM",
+      "target": "OBC",
+      "code": 122,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "HKテレメを初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_CLEAR_SYSTEM_TLM",
+      "target": "OBC",
+      "code": 123,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "systemテレメを初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_CLEAR_USER_TLM",
+      "target": "OBC",
+      "code": 124,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "high_freq_tlm, low_freq_tlm を初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_START_TLM",
+      "target": "OBC",
+      "code": 125,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLM送出開始",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_STOP_TLM",
+      "target": "OBC",
+      "code": 126,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLM送出一時停止",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_CLEAR_TLM_TL",
+      "target": "OBC",
+      "code": 127,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLM送出用TLをクリア",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_REGISTER_HK_TLM",
+      "target": "OBC",
+      "code": 128,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "category"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "TLM_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "送出回数"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "HKテレメを登録",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_REGISTER_SYSTEM_TLM",
+      "target": "OBC",
+      "code": 129,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "category"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "TLM_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "送出回数"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "systemテレメを登録",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_REGISTER_HIGH_FREQ_TLM",
+      "target": "OBC",
+      "code": 130,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "category"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "TLM_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "送出回数"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "high_freq_tlm を登録",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TLM_MGR_REGISTER_LOW_FREQ_TLM",
+      "target": "OBC",
+      "code": 131,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "category"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "TLM_ID"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "送出回数"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "low_freq_tlm を登録",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,Divided Cmd Utility コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DCU_ABORT_CMD",
+      "target": "OBC",
+      "code": 132,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "Cmd ID"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "実行中の分割コマンドを停止する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DCU_DOWN_ABORT_FLAG",
+      "target": "OBC",
+      "code": 133,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "Cmd ID"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "エラー，またはコマンドによって中断ステータスとなっているコマンドを，実行可能状態に戻す",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DCU_CLEAR_LOG",
+      "target": "OBC",
+      "code": 134,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "ログをクリアする",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,Test App コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TEST_CCP_REGISTER_TLC_ASAP",
+      "target": "OBC",
+      "code": 135,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "ti"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CCP_register_tlc_asap  のテスト用コマンド",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_TEST_CCP_GET_RAW_PARAM_INFO",
+      "target": "OBC",
+      "code": 136,
+      "parameters": [
+        {
+          "data_type": "uint16_t",
+          "description": "raw data len"
+        },
+        {
+          "data_type": "uint8_t",
+          "description": "first data"
+        },
+        {
+          "data_type": "raw",
+          "description": "raw data"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "CCP UTIL の ParamGenerator のテスト",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* CDH,GS用,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_DRIVER_RESET",
+      "target": "OBC",
+      "code": 256,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "MS VCDUの排出間隔設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_SET_MS_FLUSH_INTERVAL",
+      "target": "OBC",
+      "code": 257,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "排出間隔"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "MS VCDUの排出間隔設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_SET_RP_FLUSH_INTERVAL",
+      "target": "OBC",
+      "code": 258,
+      "parameters": [
+        {
+          "data_type": "uint32_t",
+          "description": "排出間隔"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "RP VCDUの排出間隔設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_SET_FARM_PW",
+      "target": "OBC",
+      "code": 259,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "positive_window_width"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "FARM-1のPositive Window Width設定",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_SET_INFO",
+      "target": "OBC",
+      "code": 260,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "TLM選択"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "GS送信TLMが0ならCCSDSに, 1ならUARTの情報が出てくる",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_CCSDS_GET_BUFFER",
+      "target": "OBC",
+      "code": 261,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_CCSDS_SET_RATE",
+      "target": "OBC",
+      "code": 262,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "bps セットパラメータ"
+        }
+      ],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "40M/パラメータ が bps になる．初期値は 0xAD で 230.4 Kbps (微妙に対応していない)",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_UART_TLM_ON",
+      "target": "OBC",
+      "code": 263,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLM の UART への送出を行う",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_DI_GS_UART_TLM_OFF",
+      "target": "OBC",
+      "code": 264,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "TLM の UART への送出を止める",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,WDT用コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_WDT_INIT",
+      "target": "OBC",
+      "code": 265,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "WDT初期化．WDTがアプリイニシャライザを持たなくなったので追加",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_WDT_ENABLE",
+      "target": "OBC",
+      "code": 266,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "WDT有効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_WDT_DISABLE",
+      "target": "OBC",
+      "code": 267,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "WDT無効化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_WDT_STOP_CLEAR",
+      "target": "OBC",
+      "code": 268,
+      "parameters": [],
+      "is_danger": true,
+      "is_restricted": false,
+      "description": "WDTのカウンタクリアを止める＝リセット実行",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_WDT_START_CLEAR",
+      "target": "OBC",
+      "code": 269,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "WDTのカウンタクリアを開始する",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,UART TESTコマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UART_TEST_INIT_DI",
+      "target": "OBC",
+      "code": 270,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "DI初期化",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UART_TEST_UPDATE",
+      "target": "OBC",
+      "code": 271,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "DI update",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UART_TEST_SEND_TEST",
+      "target": "OBC",
+      "code": 272,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": "id"
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "DI send test",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* POWER,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* COM,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* MISSION,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* PROP,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* AOCS,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* Thermal,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* Trajectory,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* HILS,HILS用コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* Other,汎用コマンド用コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_CMD_ADD",
+      "target": "OBC",
+      "code": 992,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "汎用コマンドのバッファに指定サイズのデータを入れる",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_CMD_SEND",
+      "target": "OBC",
+      "code": 993,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "引数のCHに汎用コマンドのバッファにあるデータを送信する",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_CMD_RESET",
+      "target": "OBC",
+      "code": 994,
+      "parameters": [],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "汎用コマンドのバッファをクリアする",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,汎用カウンタ用コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_COUNTER_INCREMENT",
+      "target": "OBC",
+      "code": 995,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "引数の汎用カウンタをインクリメントする",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_COUNTER_RESET",
+      "target": "OBC",
+      "code": 996,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "引数の汎用カウンタをリセットする．0xffでALL_CLR",
+      "note": ""
+    },
+    {
+      "type": "COMMAND",
+      "name": "Cmd_UTIL_COUNTER_SET_PARAM",
+      "target": "OBC",
+      "code": 997,
+      "parameters": [
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint32_t",
+          "description": ""
+        },
+        {
+          "data_type": "uint8_t",
+          "description": ""
+        }
+      ],
+      "is_danger": false,
+      "is_restricted": false,
+      "description": "引数の汎用カウンタの閾値・アノマリ発行有無を設定する",
+      "note": ""
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "* NonOrder,これ以下はコマンドIDが自動で割り振られない！,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,CmdCodeSibGeneratorによって，RTのみ生成,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "**,CDH特殊コマンド,,,,,,,,,,,,,,,,,,,"
+    },
+    {
+      "type": "COMMENT",
+      "text": "*,Cmd_OBC_CHECK_SIB_VERSION,OBC,0x05ff,0,,,,,,,,,,,,,,,SIBとC2Aのバージョン整合性確認,"
+    }
+  ]
+}

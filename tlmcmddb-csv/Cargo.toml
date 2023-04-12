@@ -1,0 +1,15 @@
+[package]
+name = "tlmcmddb-csv"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+csv = "1.1.6"
+tlmcmddb = { path = "../tlmcmddb" }
+serde = { version = "1.0.150", features = ["derive"] }
+
+[dev-dependencies]
+serde_json = "1"

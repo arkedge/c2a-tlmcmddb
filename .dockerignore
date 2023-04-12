@@ -1,0 +1,7 @@
+/target/
+/.git/
+/.github/
+/.dockerignore
+/.gitmodules
+/README.md
+Dockerfile

@@ -1,0 +1,985 @@
+[
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "PH.VER",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 0,
+          "bit_position": 0,
+          "bit_length": 3
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      },
+      {
+        "type": "FIELD",
+        "name": "PH.TYPE",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 0,
+          "bit_position": 3,
+          "bit_length": 1
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      },
+      {
+        "type": "FIELD",
+        "name": "PH.SH_FLAG",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 0,
+          "bit_position": 4,
+          "bit_length": 1
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      },
+      {
+        "type": "FIELD",
+        "name": "PH.APID",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 0,
+          "bit_position": 5,
+          "bit_length": 11
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "PH.SEQ_FLAG",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 2,
+          "bit_position": 0,
+          "bit_length": 2
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      },
+      {
+        "type": "FIELD",
+        "name": "PH.SEQ_COUNT",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 2,
+          "bit_position": 2,
+          "bit_length": 14
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "PH.PACKET_LEN",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 4,
+          "bit_position": 0,
+          "bit_length": 16
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.VER",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 6,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.TI",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 7,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.TLM_ID",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 11,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": "HEX",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "double",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.GLOBAL_TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 12,
+          "bit_position": 0,
+          "bit_length": 64
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.ON_BOARD_SUBNET_TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 20,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.DEST_FLAGS",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 24,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": "HEX",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": ""
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "SH.DR_PARTITION",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 25,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "TMGR_get_master_clock().mode_cycle"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TM_MODE_TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 26,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "double",
+      "expression": "TMGR_get_unixtime_at_ti0()"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TM_UNIXTIME_AT_TI0",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 30,
+          "bit_position": 0,
+          "bit_length": 64
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)(mode_manager->current_id)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.MM_OPSMODE",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 38,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "START_UP"
+              },
+              {
+                "key": 1,
+                "value": "INITIAL"
+              },
+              {
+                "key": 2,
+                "value": "GND_TEST"
+              },
+              {
+                "key": 3,
+                "value": "WDFAR"
+              },
+              {
+                "key": 4,
+                "value": "RTC_HIGH_RATE"
+              },
+              {
+                "key": 5,
+                "value": "5"
+              },
+              {
+                "key": 6,
+                "value": "6"
+              },
+              {
+                "key": 7,
+                "value": "7"
+              },
+              {
+                "key": 8,
+                "value": "8"
+              },
+              {
+                "key": 9,
+                "value": "9"
+              },
+              {
+                "key": 10,
+                "value": "10"
+              },
+              {
+                "key": 11,
+                "value": "11"
+              },
+              {
+                "key": 12,
+                "value": "12"
+              },
+              {
+                "key": 13,
+                "value": "13"
+              },
+              {
+                "key": 14,
+                "value": "14"
+              },
+              {
+                "key": 15,
+                "value": "15"
+              },
+              {
+                "key": 16,
+                "value": "MAX"
+              }
+            ],
+            "default_value": "N/A"
+          }
+        },
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)( ((uint8_t)(mode_manager->stat) << 7 & 0x80) | ((uint8_t)(mode_manager->previous_id) & 0x7F) )"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.MM_STS",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 39,
+          "bit_position": 0,
+          "bit_length": 1
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "FINISHED"
+              },
+              {
+                "key": 1,
+                "value": "PROGRESS"
+              }
+            ],
+            "default_value": "N/A"
+          }
+        },
+        "description": "",
+        "note": ""
+      },
+      {
+        "type": "FIELD",
+        "name": "OBC.MM_OPSMODE_PREV",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 39,
+          "bit_position": 1,
+          "bit_length": 7
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "START_UP"
+              },
+              {
+                "key": 1,
+                "value": "INITIAL"
+              },
+              {
+                "key": 2,
+                "value": "GND_TEST"
+              },
+              {
+                "key": 3,
+                "value": "WDFAR"
+              },
+              {
+                "key": 4,
+                "value": "RTC_HIGH_RATE"
+              },
+              {
+                "key": 5,
+                "value": "5"
+              },
+              {
+                "key": 6,
+                "value": "6"
+              },
+              {
+                "key": 7,
+                "value": "7"
+              },
+              {
+                "key": 8,
+                "value": "8"
+              },
+              {
+                "key": 9,
+                "value": "9"
+              },
+              {
+                "key": 10,
+                "value": "10"
+              },
+              {
+                "key": 11,
+                "value": "11"
+              },
+              {
+                "key": 12,
+                "value": "12"
+              },
+              {
+                "key": 13,
+                "value": "13"
+              },
+              {
+                "key": 14,
+                "value": "14"
+              },
+              {
+                "key": 15,
+                "value": "15"
+              },
+              {
+                "key": 16,
+                "value": "MAX"
+              }
+            ],
+            "default_value": "N/A"
+          }
+        },
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": "task_dispathcer->task_list_id"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TDSP.CURRENT_ID",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 40,
+          "bit_position": 0,
+          "bit_length": 16
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)gs_driver->latest_info->rx.rec_status"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TCTF_LAST_RECV_ACK",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 42,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "SUCCESS"
+              },
+              {
+                "key": 1,
+                "value": "ERROR"
+              }
+            ],
+            "default_value": null
+          }
+        },
+        "description": "TC Transer Frame 受信処理結果",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "(uint32_t)gs_driver->latest_info->rx.last_rec_time"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TCTF_LAST_RECV_TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 43,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "最新TC Transer Frame受信時刻",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)(gs_driver->latest_info->rx.cmd_ack)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.TCP_LAST_RECV_ACK",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 47,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "SUCCESS"
+              },
+              {
+                "key": 1,
+                "value": "FORWARDED"
+              },
+              {
+                "key": 2,
+                "value": "LIST_FULL"
+              },
+              {
+                "key": 3,
+                "value": "PACKET_NOT_FOUND"
+              },
+              {
+                "key": 4,
+                "value": "INVALID_PACKET"
+              },
+              {
+                "key": 5,
+                "value": "TLC_SUCCESS"
+              },
+              {
+                "key": 6,
+                "value": "TLC_PAST_TIME"
+              },
+              {
+                "key": 7,
+                "value": "TLC_ALREADY_EXISTS"
+              },
+              {
+                "key": 8,
+                "value": "BC_SUCCESS"
+              },
+              {
+                "key": 9,
+                "value": "BC_INVALID_BLOCK_NO"
+              },
+              {
+                "key": 10,
+                "value": "BC_ISORATED_CMD"
+              },
+              {
+                "key": 11,
+                "value": "BC_CMD_TOO_LONG"
+              },
+              {
+                "key": 12,
+                "value": "UNKNOWN"
+              }
+            ],
+            "default_value": null
+          }
+        },
+        "description": "最新TCPacket受信処理結果",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "PL_count_executed_nodes(&PH_gs_cmd_list)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.COUNTER",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 48,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "地上局コマンドカウンタ",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "(uint32_t)(gs_command_dispatcher->prev.time.total_cycle)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_EXEC.TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 52,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "最新地上局コマンド実行時刻",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": "(uint16_t)(gs_command_dispatcher->prev.code)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_EXEC.ID",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 56,
+          "bit_position": 0,
+          "bit_length": 16
+        },
+        "conversion_info": "NONE",
+        "description": "最新地上局コマンドID",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)(gs_command_dispatcher->prev.cmd_ret.exec_sts)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_EXEC.EXEC_STS",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 58,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "SUC"
+              },
+              {
+                "key": 1,
+                "value": "LEN"
+              },
+              {
+                "key": 2,
+                "value": "PRM"
+              },
+              {
+                "key": 3,
+                "value": "CNT"
+              },
+              {
+                "key": 4,
+                "value": "NDF"
+              },
+              {
+                "key": 5,
+                "value": "RUT"
+              },
+              {
+                "key": 6,
+                "value": "FMT"
+              }
+            ],
+            "default_value": "ERR"
+          }
+        },
+        "description": "最新地上局コマンド実行結果",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "gs_command_dispatcher->prev.cmd_ret.err_code"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_EXEC.ERR_CODE",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 59,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "(uint32_t)(gs_command_dispatcher->prev_err.time.total_cycle)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_ERR.TIME",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 63,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "最新地上局コマンド実行時刻",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint16_t",
+      "expression": "(uint16_t)(gs_command_dispatcher->prev_err.code)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_ERR.ID",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 67,
+          "bit_position": 0,
+          "bit_length": 16
+        },
+        "conversion_info": "NONE",
+        "description": "最新地上局コマンドID",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint8_t",
+      "expression": "(uint8_t)(gs_command_dispatcher->prev_err.cmd_ret.exec_sts)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_ERR.EXEC_STS",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 69,
+          "bit_position": 0,
+          "bit_length": 8
+        },
+        "conversion_info": {
+          "STATUS": {
+            "variants": [
+              {
+                "key": 0,
+                "value": "SUC"
+              },
+              {
+                "key": 1,
+                "value": "LEN"
+              },
+              {
+                "key": 2,
+                "value": "PRM"
+              },
+              {
+                "key": 3,
+                "value": "CNT"
+              },
+              {
+                "key": 4,
+                "value": "NDF"
+              },
+              {
+                "key": 5,
+                "value": "RUT"
+              },
+              {
+                "key": 6,
+                "value": "FMT"
+              }
+            ],
+            "default_value": "ERR"
+          }
+        },
+        "description": "最新地上局コマンド実行結果",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "gs_command_dispatcher->prev_err.cmd_ret.err_code"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.LAST_ERR.ERR_CODE",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 70,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "",
+        "note": ""
+      }
+    ]
+  },
+  {
+    "type": "FIELD_GROUP",
+    "onboard_software_info": {
+      "variable_type": "uint32_t",
+      "expression": "(uint32_t)(gs_command_dispatcher->error_counter)"
+    },
+    "sub_entries": [
+      {
+        "type": "FIELD",
+        "name": "OBC.GS_CMD.ERR_COUNTER",
+        "extraction_info": {
+          "extraction_type": "PACKET",
+          "octet_position": 74,
+          "bit_position": 0,
+          "bit_length": 32
+        },
+        "conversion_info": "NONE",
+        "description": "地上局コマンド実行異常カウンタ",
+        "note": ""
+      }
+    ]
+  }
+]

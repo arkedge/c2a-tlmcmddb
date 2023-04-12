@@ -1,0 +1,5 @@
+# c2a-tlmcmddb-model - TlmCmd DB data model and CSV parser
+
+- `tlmcmddb`: a crate provides data model
+- `tlmcmddb-csv`: a TlmCmd DB CSV parser
+- `tlmcmddb-cli`: a CLI tool converts CSV to JSON
