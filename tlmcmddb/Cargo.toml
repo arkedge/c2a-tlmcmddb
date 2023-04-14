@@ -3,6 +3,8 @@ name = "tlmcmddb"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
+description = "C2A TlmCmd DB data model"
+repository = "https://github.com/arkedge/c2a-tlmcmddb"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
