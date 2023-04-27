@@ -10,7 +10,7 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 
 [dependencies]
 anyhow = "1"
-csv = "1.1.6"
+csv = "1.2.1"
 tlmcmddb = "0.1.0"
 serde = { version = "1.0.150", features = ["derive"] }
 
