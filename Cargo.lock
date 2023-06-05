@@ -158,9 +158,9 @@ checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 
 [[package]]
 name = "csv"
-version = "1.2.1"
+version = "1.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b015497079b9a9d69c02ad25de6c0a6edef051ea6360a327d0bd05802ef64ad"
+checksum = "626ae34994d3d8d668f4269922248239db4ae42d538b14c398b74a52208e8086"
 dependencies = [
  "csv-core",
  "itoa",
@@ -386,14 +386,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "tlmcmddb"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2ad369378cb3161705423ac55a49190816b6044296b576bdf9d7049dba5b9132"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "tlmcmddb-cli"
 version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",
  "serde_json",
- "tlmcmddb",
- "tlmcmddb-csv",
+ "tlmcmddb 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tlmcmddb-csv 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -404,7 +413,19 @@ dependencies = [
  "csv",
  "serde",
  "serde_json",
- "tlmcmddb",
+ "tlmcmddb 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "tlmcmddb-csv"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6aca4120f5913a778928421b1fb49296f76765b96627e8efe3e710007e16032f"
+dependencies = [
+ "anyhow",
+ "csv",
+ "serde",
+ "tlmcmddb 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
