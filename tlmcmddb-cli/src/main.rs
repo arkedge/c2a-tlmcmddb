@@ -5,7 +5,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use clap::{Parser, Subcommand};
 use tlmcmddb::Database;
 
@@ -24,6 +24,8 @@ enum Command {
         output: PathBuf,
         #[clap(long)]
         pretty: bool,
+        #[clap(long)]
+        component_name: Option<String>,
     },
     Merge {
         #[clap(required = true)]
@@ -140,6 +142,7 @@ fn main() -> Result<()> {
             cmd_db_dir,
             output,
             pretty,
+            component_name,
         } => {
             let mut builder = DatabaseBuilder::default();
             for entry in fs::read_dir(tlm_db_dir)? {
@@ -158,6 +161,10 @@ fn main() -> Result<()> {
                     component,
                     telemetry,
                 } = filename.parse().context(ctx.clone())?;
+                let component = component_name
+                    .clone()
+                    .or(component)
+                    .ok_or_else(|| anyhow!("filename must contain component name"))?;
                 let file = fs::OpenOptions::new()
                     .read(true)
                     .open(entry.path())

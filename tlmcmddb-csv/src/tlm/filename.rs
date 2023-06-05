@@ -4,7 +4,7 @@ use anyhow::anyhow;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct Filename {
-    pub component: String,
+    pub component: Option<String>,
     pub telemetry: String,
 }
 
@@ -22,11 +22,14 @@ impl FromStr for Filename {
         let telemetry = basename[symbol_index + SYMBOL_TLM_DB.len()..].to_string();
         let head = &basename[..symbol_index];
         let Some(underscore_index) = head.rfind('_') else {
-            return Err(anyhow!("filename must contain component name"));
+            return Ok(Self {
+                component: None,
+                telemetry,
+            });
         };
         let component = head[underscore_index + 1..].to_string();
         Ok(Self {
-            component,
+            component: Some(component),
             telemetry,
         })
     }
@@ -43,7 +46,7 @@ mod tests {
             component,
             telemetry,
         } = hk.parse().unwrap();
-        assert_eq!("MOBC", component);
+        assert_eq!(Some("MOBC"), component.as_deref());
         assert_eq!("HK", telemetry);
     }
 }
