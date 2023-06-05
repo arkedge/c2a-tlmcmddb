@@ -1,6 +1,6 @@
 [package]
 name = "tlmcmddb-csv"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 description = "C2A TlmCmd DB CSV parser"
@@ -11,7 +11,7 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 [dependencies]
 anyhow = "1"
 csv = "1.2.1"
-tlmcmddb = "0.1.0"
+tlmcmddb = "0.2.0"
 serde = { version = "1.0.160", features = ["derive"] }
 
 [dev-dependencies]

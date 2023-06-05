@@ -1,6 +1,6 @@
 [package]
 name = "tlmcmddb-cli"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 license = "MIT"
 description = "C2A TlmCmd DB utility"
@@ -11,6 +11,6 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 [dependencies]
 anyhow = { version = "1", features = ["backtrace"] }
 clap = { version = "4.3.0", features = ["derive"] }
-tlmcmddb = "0.1.0"
-tlmcmddb-csv = "0.1.0"
+tlmcmddb = "0.2.0"
+tlmcmddb-csv = "0.2.0"
 serde_json = "1"
