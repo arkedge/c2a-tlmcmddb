@@ -10,7 +10,7 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 
 [dependencies]
 anyhow = { version = "1", features = ["backtrace"] }
-clap = { version = "4.3.4", features = ["derive"] }
+clap = { version = "4.3.8", features = ["derive"] }
 tlmcmddb = "0.2.0"
 tlmcmddb-csv = "0.2.0"
 serde_json = "1"
