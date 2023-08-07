@@ -9,4 +9,4 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.164", features = ["derive"] }
+serde = { version = "1.0.183", features = ["derive"] }
