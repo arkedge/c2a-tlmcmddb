@@ -1,6 +1,6 @@
 [package]
 name = "tlmcmddb-csv"
-version = "0.2.0"
+version.workspace = true
 edition = "2021"
 license = "MIT"
 description = "C2A TlmCmd DB CSV parser"
