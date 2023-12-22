@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.5.1 (2023-12-22)
+
+### Internal
+
+- [#37](https://github.com/arkedge/c2a-tlmcmddb/pull/37): Bump internal c2a-tlmcmddb deps version to 2.5
+
+
 ## 2.5.0 (2023-12-22)
 
 ### Added
