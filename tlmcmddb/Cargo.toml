@@ -4,7 +4,7 @@ version.workspace = true
 edition = "2021"
 license = "MIT"
 description = "C2A TlmCmd DB data model"
-repository = "https://github.com/arkedge/c2a-tlmcmddb"
+repository.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
