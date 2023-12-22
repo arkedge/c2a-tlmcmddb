@@ -1,5 +1,7 @@
 [workspace.package]
 version = "0.2.0"
+repository = "https://github.com/arkedge/c2a-tlmcmddb"
+readme = "README.md"
 
 [workspace]
 

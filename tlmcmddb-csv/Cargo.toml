@@ -4,7 +4,8 @@ version.workspace = true
 edition = "2021"
 license = "MIT"
 description = "C2A TlmCmd DB CSV parser"
-repository = "https://github.com/arkedge/c2a-tlmcmddb"
+repository.workspace = true
+readme.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
