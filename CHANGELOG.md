@@ -10,6 +10,7 @@
 ### Documentation
 
 - [#33](https://github.com/arkedge/c2a-tlmcmddb/pull/33): Add changelog
+- [#34](https://github.com/arkedge/c2a-tlmcmddb/pull/34): Update descriptions
 
 ### Internal
 
@@ -28,6 +29,7 @@
 - [#17](https://github.com/arkedge/c2a-tlmcmddb/pull/17): Update Rust crate serde to 1.0.193
 - [#18](https://github.com/arkedge/c2a-tlmcmddb/pull/18): Update Rust crate csv to 1.3.0
 - [#13](https://github.com/arkedge/c2a-tlmcmddb/pull/13): Update Rust crate clap to 4.4.11
+- [#32](https://github.com/arkedge/c2a-tlmcmddb/pull/32): Release 2.5.0
 
 
 ## 0.2.0 (2023-06-05)
