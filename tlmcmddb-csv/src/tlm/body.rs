@@ -234,9 +234,9 @@ struct LineConversionInfo {
 }
 
 struct LineDisplayInfo {
-    label: Option<String>,
-    unit: Option<String>,
-    format: Option<String>,
+    label: String,
+    unit: String,
+    format: String,
 }
 
 impl TryFrom<LineConversionInfo> for model::ConversionInfo {
@@ -455,9 +455,9 @@ impl From<LineV2> for LineV3 {
             a3: line.a3,
             a4: line.a4,
             a5: line.a5,
-            label: None,
-            unit: None,
-            format: None,
+            label: "".to_owned(),
+            unit: "".to_owned(),
+            format: "".to_owned(),
             status: line.status,
             description: line.description,
             note: line.note,
@@ -492,9 +492,9 @@ struct LineV3 {
     a4: Option<f64>,
     a5: Option<f64>,
     status: Option<String>,
-    label: Option<String>,
-    unit: Option<String>,
-    format: Option<String>,
+    label: String,
+    unit: String,
+    format: String,
     description: String,
     note: String,
 }
@@ -515,9 +515,9 @@ impl LineV3 {
 
     fn take_display_info(&mut self) -> LineDisplayInfo {
         LineDisplayInfo {
-            label: self.label.take(),
-            unit: self.unit.take(),
-            format: self.unit.take(),
+            label: std::mem::take(&mut self.label),
+            unit: std::mem::take(&mut self.unit),
+            format: std::mem::take(&mut self.format),
         }
     }
 }
@@ -578,7 +578,6 @@ impl TryFrom<LineV3> for model::Field {
             conversion_info: conversion_info.try_into()?,
             display_info: display_info.into(),
             description: unescape(&line.description),
-            display_info: Default::default(),
             note: unescape(&line.note),
         })
     }
