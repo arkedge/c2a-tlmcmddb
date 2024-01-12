@@ -34,8 +34,8 @@ fn parse_first_line(record: StringRecord) -> Result<String> {
 
 fn parse_packet_id(hex_with_0x: &str) -> Result<u8> {
     let Some(hex) = hex_with_0x.strip_prefix("0x") else {
-            return Err(anyhow!("the value of PacketID must start with 0x"));
-        };
+        return Err(anyhow!("the value of PacketID must start with 0x"));
+    };
     u8::from_str_radix(hex, 16).context("parsing PacketID")
 }
 
