@@ -413,6 +413,7 @@ impl TryFrom<Line> for model::Field {
             extraction_info,
             conversion_info: conversion_info.try_into()?,
             description: unescape(&line.description),
+            display_info: Default::default(),
             note: unescape(&line.note),
         })
     }

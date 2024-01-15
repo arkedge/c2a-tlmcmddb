@@ -64,6 +64,9 @@ pub struct Field {
     /// テレメトリのオクテット列からこのフィールドの値を抜き出す際に必要な情報
     pub extraction_info: FieldExtractionInfo,
     pub conversion_info: ConversionInfo,
+    /// GS SW などでテレメトリを表示するときの情報
+    #[serde(default)]
+    pub display_info: DisplayInfo,
     /// このフィールドの説明（衛星運用者向け）
     pub description: String,
     /// このフィールドの説明（衛星開発者向け）
@@ -197,6 +200,18 @@ impl VariableType {
             VariableType::Uint8 | VariableType::Uint16 | VariableType::Uint32
         )
     }
+}
+
+/// GS SW などでテレメトリを表示するときの情報
+/// 各フィールドの具体的な解釈と利用方法は GS SW に依存する
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+pub struct DisplayInfo {
+    /// 表示名
+    pub label: String,
+    /// 単位
+    pub unit: String,
+    /// フォーマットの指定
+    pub format: String,
 }
 
 /// コメント行
