@@ -5,34 +5,41 @@ use csv::StringRecord;
 use serde::Deserialize;
 use tlmcmddb::tlm::{self as model};
 
+use super::version::Version;
 use crate::{escape::unescape, macros::check_header, util};
 
 /*
-+-------+--------+---------------+---------------------------------------------+------------------------------------------------------+--------+-------+
-|       | Entry  |   OSW Info.   |              Extraction Info.               |                   Conversion Info.                   |        |       |
-|       |--------+-------+-------+-------+-------------------------------------+--------+-----------------------------------+---------+        |       |
-| Comm  | Name   | Var.  | Expr  | Ext.  |           Pos. Designator           | Conv.  |                 Poly              | Status  | Descr  | Note  |
-|       |        | Type  |       | Type  |-------------+-----------+-----------+ Type   +-----+-----+-----+-----+-----+-----+         |        |       |
-|       |        |       |       |       | Octet Pos.  | bit Pos.  | bit Len.  |        | a0  | a1  | a2  | a3  | a4  | a5  |         |        |       |
-+-------+--------+-------+-------+-------+-------------+-----------+-----------+--------+-----+-----+-----+-----+-----+-----+---------+--------+-------+
++-------+--------+---------------+---------------------------------------------+------------------------------------------------------+--------------------------+--------+-------+
+|       | Entry  |   OSW Info.   |              Extraction Info.               |                   Conversion Info.                   | Display Info. (since v3) |        |       |
+|       |--------+-------+-------+-------+-------------------------------------+--------+-----------------------------------+---------+--------+-------+---------+        |       |
+| Comm  | Name   | Var.  | Expr  | Ext.  |           Pos. Designator           | Conv.  |                 Poly              | Status  | Label  | Unit  | Format  | Descr  | Note  |
+|       |        | Type  |       | Type  |-------------+-----------+-----------+ Type   +-----+-----+-----+-----+-----+-----+         |        |       |         |        |       |
+|       |        |       |       |       | Octet Pos.  | bit Pos.  | bit Len.  |        | a0  | a1  | a2  | a3  | a4  | a5  |         |        |       |         |        |       |
++-------+--------+-------+-------+-------+-------------+-----------+-----------+--------+-----+-----+-----+-----+-----+-----+---------+--------+-------+---------+--------+-------+
 */
 
 mod header {
     pub const COMMENT: &str = "Comment";
     pub const TLM_ENTRY: &str = "TLM Entry";
+    pub const TLM_FIELD: &str = "TLM Field";
     pub const ONBOARD_SOFTWARE_INFO: &str = "Onboard Software Info.";
     pub const EXTRACTION_INFO: &str = "Extraction Info.";
     pub const CONVERSION_INFO: &str = "Conversion Info.";
+    pub const DISPLAY_INFO: &str = "Display Info.";
     pub const DESCRIPTION: &str = "Description";
     pub const NOTE: &str = "Note";
     pub const NAME: &str = "Name";
     pub const VAR_TYPE: &str = "Var.%%##Type";
     pub const VARIABLE_OR_FUNCTION_NAME: &str = "Variable or Function Name";
     pub const EXT_TYPE: &str = "Ext.%%##Type";
-    pub const POS_DESIGNATOR: &str = "Pos. Desiginator";
+    pub const POS_DESIGNATOR_OLD_TYPO: &str = "Pos. Desiginator";
+    pub const POS_DESIGNATOR: &str = "Pos. Designator";
     pub const CONV_TYPE: &str = "Conv.%%##Type";
     pub const POLY: &str = "Poly (Σa_i * x^i)";
     pub const STATUS: &str = "Status";
+    pub const LABEL: &str = "Label";
+    pub const UNIT: &str = "Unit";
+    pub const FORMAT: &str = "Format";
     pub const OCTET_POS: &str = "Octet%%##Pos.";
     pub const BIT_POS: &str = "bit%%##Pos.";
     pub const BIT_LEN: &str = "bit%%##Len.";
@@ -44,28 +51,81 @@ mod header {
     pub const A5: &str = "a5";
 }
 
-fn check_first_header(record: StringRecord) -> Result<()> {
-    ensure!(record.len() >= 18, "the number of columns is mismatch");
-    check_header!(&record[0], header::COMMENT);
-    check_header!(&record[1], header::TLM_ENTRY);
-    check_header!(&record[2], header::ONBOARD_SOFTWARE_INFO);
-    check_header!(&record[4], header::EXTRACTION_INFO);
-    check_header!(&record[8], header::CONVERSION_INFO);
-    check_header!(&record[16], header::DESCRIPTION);
-    check_header!(&record[17], header::NOTE);
+struct HeaderScanner {
+    record: StringRecord,
+    position: usize,
+}
+
+impl HeaderScanner {
+    fn new(record: StringRecord) -> Self {
+        HeaderScanner {
+            record,
+            position: 0,
+        }
+    }
+
+    fn skip(&mut self, n: usize) {
+        self.position += n;
+    }
+
+    fn check(&mut self, expected: &str) -> Result<()> {
+        let actual = self
+            .record
+            .get(self.position)
+            .ok_or_else(|| anyhow!("the number of columns is mismatch"))?;
+        check_header!(actual, expected);
+        self.position += 1;
+        Ok(())
+    }
+}
+
+fn check_first_header(record: StringRecord, version: Version) -> Result<()> {
+    let mut scanner = HeaderScanner::new(record);
+    scanner.check(header::COMMENT)?;
+    if version.major <= 2 {
+        scanner.check(header::TLM_ENTRY)?;
+    } else {
+        scanner.check(header::TLM_FIELD)?;
+    }
+    scanner.check(header::ONBOARD_SOFTWARE_INFO)?;
+    scanner.skip(1);
+    scanner.check(header::EXTRACTION_INFO)?;
+    scanner.skip(3);
+    scanner.check(header::CONVERSION_INFO)?;
+    scanner.skip(7);
+    if version.major >= 3 {
+        scanner.check(header::DISPLAY_INFO)?;
+        scanner.skip(2);
+    }
+    scanner.check(header::DESCRIPTION)?;
+    scanner.check(header::NOTE)?;
     Ok(())
 }
 
-fn check_second_header(record: StringRecord) -> Result<()> {
+fn check_second_header(record: StringRecord, version: Version) -> Result<()> {
     ensure!(record.len() >= 16, "the number of columns is mismatch");
-    check_header!(&record[1], header::NAME);
-    //check_header!(&record[2], header::VAR_TYPE);
-    check_header!(&record[3], header::VARIABLE_OR_FUNCTION_NAME);
-    //check_header!(&record[4], header::EXT_TYPE);
-    check_header!(&record[5], header::POS_DESIGNATOR);
-    //check_header!(&record[8], header::CONV_TYPE);
-    check_header!(&record[9], header::POLY);
-    check_header!(&record[15], header::STATUS);
+
+    let mut scanner = HeaderScanner::new(record);
+    scanner.skip(1);
+    scanner.check(header::NAME)?;
+    scanner.skip(1); // header::VAR_TYPE
+    scanner.check(header::VARIABLE_OR_FUNCTION_NAME)?;
+    scanner.skip(1); // header::EXT_TYPE
+    if version.major <= 2 {
+        scanner.check(header::POS_DESIGNATOR_OLD_TYPO)?;
+    } else {
+        scanner.check(header::POS_DESIGNATOR)?;
+    }
+    scanner.skip(2);
+    scanner.skip(1); // header::CONV_TYPE
+    scanner.check(header::POLY)?;
+    scanner.skip(5);
+    scanner.check(header::STATUS)?;
+    if version.major >= 3 {
+        scanner.check(header::LABEL)?;
+        scanner.check(header::UNIT)?;
+        scanner.check(header::FORMAT)?;
+    }
     Ok(())
 }
 
@@ -83,13 +143,13 @@ fn check_third_header(record: StringRecord) -> Result<()> {
     Ok(())
 }
 
-fn check_headers<I, E>(mut iter: I) -> Result<()>
+fn check_headers<I, E>(mut iter: I, version: Version) -> Result<()>
 where
     I: Iterator<Item = Result<StringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    check_first_header(util::next_record(&mut iter)?)?;
-    check_second_header(util::next_record(&mut iter)?)?;
+    check_first_header(util::next_record(&mut iter)?, version)?;
+    check_second_header(util::next_record(&mut iter)?, version)?;
     check_third_header(util::next_record(&mut iter)?)?;
     Ok(())
 }
@@ -104,10 +164,11 @@ fn build_comment(record: StringRecord) -> model::Comment {
     model::Comment { text }
 }
 
-fn parse_entries<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
+fn parse_entries<I, E, Line>(mut iter: I) -> Result<Vec<model::Entry>>
 where
     I: Iterator<Item = Result<StringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
+    Line: serde::de::DeserializeOwned + TryInto<LineModel, Error = anyhow::Error>,
 {
     let mut entries = vec![];
     let mut current_bit_field_group = None;
@@ -148,49 +209,16 @@ where
     Ok(entries)
 }
 
-pub fn parse<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
+pub fn parse<I, E>(mut iter: I, version: Version) -> Result<Vec<model::Entry>>
 where
     I: Iterator<Item = Result<StringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    check_headers(&mut iter)?;
-    parse_entries(&mut iter)
-}
-
-#[derive(Debug, Deserialize)]
-struct Line {
-    _comment_mark: String,
-    field_name: String,
-    variable_type: Option<model::VariableType>,
-    expression: Option<String>,
-    extraction_type: String,
-    octet_position: usize,
-    bit_position: usize,
-    bit_length: usize,
-    conversion_type: ConversionType,
-    a0: Option<f64>,
-    a1: Option<f64>,
-    a2: Option<f64>,
-    a3: Option<f64>,
-    a4: Option<f64>,
-    a5: Option<f64>,
-    status: Option<String>,
-    description: String,
-    note: String,
-}
-
-impl Line {
-    fn take_conversion_info(&mut self) -> LineConversionInfo {
-        LineConversionInfo {
-            conversion_type: self.conversion_type,
-            a0: self.a0,
-            a1: self.a1,
-            a2: self.a2,
-            a3: self.a3,
-            a4: self.a4,
-            a5: self.a5,
-            status: self.status.take(),
-        }
+    check_headers(&mut iter, version)?;
+    if version.major <= 2 {
+        parse_entries::<_, _, LineV2>(&mut iter)
+    } else {
+        parse_entries::<_, _, LineV3>(&mut iter)
     }
 }
 
@@ -203,6 +231,12 @@ struct LineConversionInfo {
     a4: Option<f64>,
     a5: Option<f64>,
     status: Option<String>,
+}
+
+struct LineDisplayInfo {
+    label: String,
+    unit: String,
+    format: String,
 }
 
 impl TryFrom<LineConversionInfo> for model::ConversionInfo {
@@ -306,6 +340,16 @@ impl TryFrom<LineConversionInfo> for model::ConversionInfo {
     }
 }
 
+impl From<LineDisplayInfo> for model::DisplayInfo {
+    fn from(info: LineDisplayInfo) -> Self {
+        Self {
+            label: info.label,
+            unit: info.unit,
+            format: info.format,
+        }
+    }
+}
+
 fn parse_status_map(s: &str) -> Result<model::conversion::Status> {
     let mut default_value = None;
     let mut map = BTreeMap::new();
@@ -359,10 +403,129 @@ enum LineModel {
     BitField(model::Field),
 }
 
-impl TryFrom<Line> for LineModel {
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize)]
+enum ConversionType {
+    #[serde(rename = "NONE")]
+    None,
+    #[serde(rename = "HEX")]
+    Hex,
+    #[serde(rename = "STATUS")]
+    Status,
+    #[serde(rename = "POLY")]
+    Poly,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct LineV2 {
+    _comment_mark: String,
+    field_name: String,
+    variable_type: Option<model::VariableType>,
+    expression: Option<String>,
+    extraction_type: String,
+    octet_position: usize,
+    bit_position: usize,
+    bit_length: usize,
+    conversion_type: ConversionType,
+    a0: Option<f64>,
+    a1: Option<f64>,
+    a2: Option<f64>,
+    a3: Option<f64>,
+    a4: Option<f64>,
+    a5: Option<f64>,
+    status: Option<String>,
+    description: String,
+    note: String,
+}
+
+impl From<LineV2> for LineV3 {
+    fn from(line: LineV2) -> Self {
+        Self {
+            _comment_mark: line._comment_mark,
+            field_name: line.field_name,
+            variable_type: line.variable_type,
+            expression: line.expression,
+            extraction_type: line.extraction_type,
+            octet_position: line.octet_position,
+            bit_position: line.bit_position,
+            bit_length: line.bit_length,
+            conversion_type: line.conversion_type,
+            a0: line.a0,
+            a1: line.a1,
+            a2: line.a2,
+            a3: line.a3,
+            a4: line.a4,
+            a5: line.a5,
+            label: "".to_owned(),
+            unit: "".to_owned(),
+            format: "".to_owned(),
+            status: line.status,
+            description: line.description,
+            note: line.note,
+        }
+    }
+}
+
+impl TryFrom<LineV2> for LineModel {
     type Error = anyhow::Error;
 
-    fn try_from(line: Line) -> Result<Self, Self::Error> {
+    fn try_from(line: LineV2) -> Result<Self, Self::Error> {
+        let line: LineV3 = line.into();
+        line.try_into()
+    }
+}
+
+#[derive(Debug, Deserialize)]
+struct LineV3 {
+    _comment_mark: String,
+    field_name: String,
+    variable_type: Option<model::VariableType>,
+    expression: Option<String>,
+    extraction_type: String,
+    octet_position: usize,
+    bit_position: usize,
+    bit_length: usize,
+    conversion_type: ConversionType,
+    a0: Option<f64>,
+    a1: Option<f64>,
+    a2: Option<f64>,
+    a3: Option<f64>,
+    a4: Option<f64>,
+    a5: Option<f64>,
+    status: Option<String>,
+    label: String,
+    unit: String,
+    format: String,
+    description: String,
+    note: String,
+}
+
+impl LineV3 {
+    fn take_conversion_info(&mut self) -> LineConversionInfo {
+        LineConversionInfo {
+            conversion_type: self.conversion_type,
+            a0: self.a0,
+            a1: self.a1,
+            a2: self.a2,
+            a3: self.a3,
+            a4: self.a4,
+            a5: self.a5,
+            status: self.status.take(),
+        }
+    }
+
+    fn take_display_info(&mut self) -> LineDisplayInfo {
+        LineDisplayInfo {
+            label: std::mem::take(&mut self.label),
+            unit: std::mem::take(&mut self.unit),
+            format: std::mem::take(&mut self.format),
+        }
+    }
+}
+
+impl TryFrom<LineV3> for LineModel {
+    type Error = anyhow::Error;
+
+    fn try_from(line: LineV3) -> Result<Self, Self::Error> {
         if line.variable_type.is_some() {
             Ok(Self::BitFieldGroup(line.try_into()?))
         } else {
@@ -371,10 +534,10 @@ impl TryFrom<Line> for LineModel {
     }
 }
 
-impl TryFrom<Line> for model::FieldGroup {
+impl TryFrom<LineV3> for model::FieldGroup {
     type Error = anyhow::Error;
 
-    fn try_from(mut line: Line) -> Result<Self, Self::Error> {
+    fn try_from(mut line: LineV3) -> Result<Self, Self::Error> {
         let Some(variable_type) = line.variable_type.take() else {
             return Err(anyhow!("Var. Type is missing"));
         };
@@ -391,10 +554,10 @@ impl TryFrom<Line> for model::FieldGroup {
     }
 }
 
-impl TryFrom<Line> for model::Field {
+impl TryFrom<LineV3> for model::Field {
     type Error = anyhow::Error;
 
-    fn try_from(mut line: Line) -> Result<Self, Self::Error> {
+    fn try_from(mut line: LineV3) -> Result<Self, Self::Error> {
         if line.variable_type.is_some() {
             return Err(anyhow!("Var. Type is present"));
         };
@@ -408,27 +571,16 @@ impl TryFrom<Line> for model::Field {
             bit_length: line.bit_length,
         };
         let conversion_info = line.take_conversion_info();
+        let display_info = line.take_display_info();
         Ok(Self {
             name: unescape(&line.field_name),
             extraction_info,
             conversion_info: conversion_info.try_into()?,
+            display_info: display_info.into(),
             description: unescape(&line.description),
-            display_info: Default::default(),
             note: unescape(&line.note),
         })
     }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize)]
-enum ConversionType {
-    #[serde(rename = "NONE")]
-    None,
-    #[serde(rename = "HEX")]
-    Hex,
-    #[serde(rename = "STATUS")]
-    Status,
-    #[serde(rename = "POLY")]
-    Poly,
 }
 
 #[cfg(test)]
@@ -444,7 +596,7 @@ mod tests {
             .has_headers(false)
             .from_reader(csv.as_slice());
         let mut iter = rdr.records();
-        let actual = parse(&mut iter).unwrap();
+        let actual = parse(&mut iter, Version { major: 2 }).unwrap();
         assert_eq!(expected, actual)
 
         // make snapshot:
