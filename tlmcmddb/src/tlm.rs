@@ -202,10 +202,15 @@ impl VariableType {
     }
 }
 
+/// GS SW などでテレメトリを表示するときの情報
+/// 各フィールドの具体的な解釈と利用方法は GS SW に依存する
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
 pub struct DisplayInfo {
+    /// 表示名
     pub label: String,
+    /// 単位
     pub unit: String,
+    /// フォーマットの指定
     pub format: String,
 }
 
