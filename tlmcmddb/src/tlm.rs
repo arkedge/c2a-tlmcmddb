@@ -52,6 +52,8 @@ pub struct FieldGroup {
 /// [FieldGroup] 内のエントリ
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE", tag = "type")]
+// コメント行はそれほど多くないはずなので large_enum_variantは許容する
+#[allow(clippy::large_enum_variant)]
 pub enum SubEntry {
     Field(Field),
     Comment(Comment),

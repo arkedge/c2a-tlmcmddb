@@ -26,16 +26,10 @@ mod header {
     pub const DESCRIPTION: &str = "Description";
     pub const NOTE: &str = "Note";
     pub const NAME: &str = "Name";
-    pub const VAR_TYPE: &str = "Var.%%##Type";
     pub const VARIABLE_OR_FUNCTION_NAME: &str = "Variable or Function Name";
-    pub const EXT_TYPE: &str = "Ext.%%##Type";
     pub const POS_DESIGNATOR: &str = "Pos. Desiginator";
-    pub const CONV_TYPE: &str = "Conv.%%##Type";
     pub const POLY: &str = "Poly (Σa_i * x^i)";
     pub const STATUS: &str = "Status";
-    pub const OCTET_POS: &str = "Octet%%##Pos.";
-    pub const BIT_POS: &str = "bit%%##Pos.";
-    pub const BIT_LEN: &str = "bit%%##Len.";
     pub const A0: &str = "a0";
     pub const A1: &str = "a1";
     pub const A2: &str = "a2";
