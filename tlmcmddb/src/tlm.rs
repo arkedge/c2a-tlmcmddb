@@ -14,8 +14,10 @@ pub struct Telemetry {
     pub name: String,
     /// このテレメトリ定義のメタデータ
     pub metadata: Metadata,
-    /// このテレメトリ定義に含まれる [Entry] のリスト
-    pub entries: Vec<Entry>,
+    /// このテレメトリの構造定義
+    /// blobが追加される前との互換性のため、entriesをaliasとする
+    #[serde(alias = "entries")]
+    pub content: Content,
 }
 
 /// テレメトリ定義のメタデータ
@@ -27,6 +29,17 @@ pub struct Metadata {
     pub is_enabled: bool,
     pub is_restricted: bool,
     pub local_variables: String,
+}
+
+/// バイト列を解釈しなblob tlmと、entryのリストとして解釈されるstruct tlmがある
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+/// blob が追加される前との互換性のため、untaggedとする
+#[serde(untagged)]
+pub enum Content {
+    /// このテレメトリはblobであり、構造をもたない
+    Blob,
+    /// このテレメトリ定義に含まれる [Entry] のリスト
+    Struct(Vec<Entry>),
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
