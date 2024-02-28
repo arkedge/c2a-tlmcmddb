@@ -282,16 +282,17 @@ impl<'de> Visitor<'de> for HexVisitor {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::PosStringRecordIterator;
 
     #[test]
     fn test() {
         let csv = include_bytes!("../fixtures/CMD_DB/valid.csv");
         let json = include_bytes!("../fixtures/CMD_DB/valid.json");
         let expected: model::Database = serde_json::from_slice(json).unwrap();
-        let mut rdr = csv::ReaderBuilder::new()
+        let rdr = csv::ReaderBuilder::new()
             .has_headers(false)
             .from_reader(csv.as_slice());
-        let mut iter = rdr.records();
+        let mut iter = PosStringRecordIterator::from_reader(rdr);
         let (_component, actual) = parse(&mut iter).unwrap();
         assert_eq!(expected, actual);
     }

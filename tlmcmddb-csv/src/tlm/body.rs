@@ -434,16 +434,17 @@ enum ConversionType {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::PosStringRecordIterator;
 
     #[test]
     fn test() {
         let csv = include_bytes!("../../fixtures/TLM_DB/valid_body.csv");
         let json = include_bytes!("../../fixtures/TLM_DB/valid_body.json");
         let expected: Vec<model::Entry> = serde_json::from_slice(json).unwrap();
-        let mut rdr = csv::ReaderBuilder::new()
+        let rdr = csv::ReaderBuilder::new()
             .has_headers(false)
             .from_reader(csv.as_slice());
-        let mut iter = rdr.records();
+        let mut iter = PosStringRecordIterator::from_reader(rdr);
         let actual = parse(&mut iter).unwrap();
         assert_eq!(expected, actual)
 
