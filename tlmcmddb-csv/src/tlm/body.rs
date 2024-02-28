@@ -5,7 +5,7 @@ use csv::StringRecord;
 use serde::Deserialize;
 use tlmcmddb::tlm::{self as model};
 
-use crate::{escape::unescape, macros::check_header, util};
+use crate::{escape::unescape, macros::check_header, util, PosStringRecord};
 
 /*
 +-------+--------+---------------+---------------------------------------------+------------------------------------------------------+--------+-------+
@@ -79,12 +79,12 @@ fn check_third_header(record: StringRecord) -> Result<()> {
 
 fn check_headers<I, E>(mut iter: I) -> Result<()>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    check_first_header(util::next_record(&mut iter)?)?;
-    check_second_header(util::next_record(&mut iter)?)?;
-    check_third_header(util::next_record(&mut iter)?)?;
+    check_first_header(util::next_record(&mut iter)?.record)?;
+    check_second_header(util::next_record(&mut iter)?.record)?;
+    check_third_header(util::next_record(&mut iter)?.record)?;
     Ok(())
 }
 
@@ -100,12 +100,13 @@ fn build_comment(record: StringRecord) -> model::Comment {
 
 fn parse_entries<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
     let mut entries = vec![];
     let mut current_bit_field_group = None;
     while let Some(record) = util::try_next_record(&mut iter)? {
+        let PosStringRecord { record, .. } = record;
         if record[0].is_empty() {
             let line = record.deserialize::<Line>(None)?;
             match line.try_into()? {
@@ -144,7 +145,7 @@ where
 
 pub fn parse<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
     check_headers(&mut iter)?;
