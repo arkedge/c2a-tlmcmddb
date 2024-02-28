@@ -5,7 +5,9 @@ use csv::StringRecord;
 use serde::{de::Visitor, Deserialize, Deserializer};
 use tlmcmddb::cmd as model;
 
-use crate::{escape::unescape, macros::check_header, util};
+use crate::{
+    escape::unescape, macros::check_header, util, PosStringRecord, PosStringRecordIterator,
+};
 
 /*
 +------------+-------+---------+-------+---------------------------------------------------------------------------------------------------------------------------+---------+-------------+--------------+-------+
@@ -96,11 +98,12 @@ fn build_comment(record: StringRecord) -> model::Comment {
 
 fn parse_body<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
     let mut entries = vec![];
     while let Some(record) = util::try_next_record(&mut iter)? {
+        let PosStringRecord { record, .. } = record;
         ensure!(record.len() >= 21, "the number of columns is mismatch");
         if record[0].is_empty() {
             let line: Line = record.deserialize(None)?;
@@ -115,19 +118,19 @@ where
 
 pub fn parse<I, E>(mut iter: I) -> Result<(String, model::Database)>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    check_first_header(util::next_record(&mut iter)?)?;
-    let component = parse_second_header(util::next_record(&mut iter)?)?;
-    check_third_header(util::next_record(&mut iter)?)?;
+    check_first_header(util::next_record(&mut iter)?.record)?;
+    let component = parse_second_header(util::next_record(&mut iter)?.record)?;
+    check_third_header(util::next_record(&mut iter)?.record)?;
     let entries = parse_body(&mut iter)?;
     Ok((component, model::Database { entries }))
 }
 
 pub fn parse_csv<R: Read>(rdr: R) -> Result<(String, model::Database)> {
-    let mut csv = crate::csv_reader_builder().from_reader(rdr);
-    let mut iter = csv.records();
+    let csv = crate::csv_reader_builder().from_reader(rdr);
+    let mut iter = PosStringRecordIterator::from_reader(csv);
     parse(&mut iter)
 }
 
