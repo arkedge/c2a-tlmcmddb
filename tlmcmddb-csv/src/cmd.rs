@@ -1,12 +1,13 @@
 use std::io::Read;
 
-use anyhow::{anyhow, ensure, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use csv::StringRecord;
 use serde::{de::Visitor, Deserialize, Deserializer};
 use tlmcmddb::cmd as model;
 
 use crate::{
-    escape::unescape, macros::check_header, util, PosStringRecord, PosStringRecordIterator,
+    escape::unescape, macros::check_header, util, ErrWithPosition, PosStringRecord,
+    PosStringRecordIterator,
 };
 
 /*
@@ -103,14 +104,17 @@ where
 {
     let mut entries = vec![];
     while let Some(record) = util::try_next_record(&mut iter)? {
-        let PosStringRecord { record, .. } = record;
+        let PosStringRecord { record, position } = &record;
         ensure!(record.len() >= 21, "the number of columns is mismatch");
         if record[0].is_empty() {
-            let line: Line = record.deserialize(None)?;
-            let command = line.try_into()?;
+            let line: Line = record.deserialize(None).err_with_position(position)?;
+            let command = line.try_into().context(format!(
+                "The following error has caused at line {}",
+                position.line() + 1
+            ))?;
             entries.push(model::Entry::Command(command));
         } else {
-            entries.push(model::Entry::Comment(build_comment(record)));
+            entries.push(model::Entry::Comment(build_comment(record.clone())));
         }
     }
     Ok(entries)

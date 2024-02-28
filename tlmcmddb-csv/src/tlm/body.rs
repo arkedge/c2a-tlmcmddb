@@ -5,7 +5,7 @@ use csv::StringRecord;
 use serde::Deserialize;
 use tlmcmddb::tlm::{self as model};
 
-use crate::{escape::unescape, macros::check_header, util, PosStringRecord};
+use crate::{escape::unescape, macros::check_header, util, ErrWithPosition, PosStringRecord};
 
 /*
 +-------+--------+---------------+---------------------------------------------+------------------------------------------------------+--------+-------+
@@ -106,10 +106,15 @@ where
     let mut entries = vec![];
     let mut current_bit_field_group = None;
     while let Some(record) = util::try_next_record(&mut iter)? {
-        let PosStringRecord { record, .. } = record;
+        let PosStringRecord { record, position } = record;
         if record[0].is_empty() {
-            let line = record.deserialize::<Line>(None)?;
-            match line.try_into()? {
+            let line = record
+                .deserialize::<Line>(None)
+                .err_with_position(&position)?;
+            match line.try_into().context(format!(
+                "The following error has caused at line {}",
+                position.line() + 1
+            ))? {
                 LineModel::BitFieldGroup(bit_field_group) => {
                     if let Some(bit_field_group) = current_bit_field_group.take() {
                         entries.push(model::Entry::FieldGroup(bit_field_group));
