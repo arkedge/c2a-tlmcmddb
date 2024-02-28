@@ -1,11 +1,14 @@
 use std::io::Read;
 
-use anyhow::{anyhow, ensure, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use csv::StringRecord;
 use serde::{de::Visitor, Deserialize, Deserializer};
 use tlmcmddb::cmd as model;
 
-use crate::{escape::unescape, macros::check_header, util};
+use crate::{
+    escape::unescape, macros::check_header, util, ErrWithPosition, PosStringRecord,
+    PosStringRecordIterator,
+};
 
 /*
 +------------+-------+---------+-------+---------------------------------------------------------------------------------------------------------------------------+---------+-------------+--------------+-------+
@@ -96,18 +99,22 @@ fn build_comment(record: StringRecord) -> model::Comment {
 
 fn parse_body<I, E>(mut iter: I) -> Result<Vec<model::Entry>>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
     let mut entries = vec![];
     while let Some(record) = util::try_next_record(&mut iter)? {
+        let PosStringRecord { record, position } = &record;
         ensure!(record.len() >= 21, "the number of columns is mismatch");
         if record[0].is_empty() {
-            let line: Line = record.deserialize(None)?;
-            let command = line.try_into()?;
+            let line: Line = record.deserialize(None).err_with_position(position)?;
+            let command = line.try_into().context(format!(
+                "The following error has caused at line {}",
+                position.line() + 1
+            ))?;
             entries.push(model::Entry::Command(command));
         } else {
-            entries.push(model::Entry::Comment(build_comment(record)));
+            entries.push(model::Entry::Comment(build_comment(record.clone())));
         }
     }
     Ok(entries)
@@ -115,19 +122,19 @@ where
 
 pub fn parse<I, E>(mut iter: I) -> Result<(String, model::Database)>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    check_first_header(util::next_record(&mut iter)?)?;
-    let component = parse_second_header(util::next_record(&mut iter)?)?;
-    check_third_header(util::next_record(&mut iter)?)?;
+    check_first_header(util::next_record(&mut iter)?.record)?;
+    let component = parse_second_header(util::next_record(&mut iter)?.record)?;
+    check_third_header(util::next_record(&mut iter)?.record)?;
     let entries = parse_body(&mut iter)?;
     Ok((component, model::Database { entries }))
 }
 
 pub fn parse_csv<R: Read>(rdr: R) -> Result<(String, model::Database)> {
-    let mut csv = crate::csv_reader_builder().from_reader(rdr);
-    let mut iter = csv.records();
+    let csv = crate::csv_reader_builder().from_reader(rdr);
+    let mut iter = PosStringRecordIterator::from_reader(csv);
     parse(&mut iter)
 }
 
@@ -275,16 +282,17 @@ impl<'de> Visitor<'de> for HexVisitor {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::PosStringRecordIterator;
 
     #[test]
     fn test() {
         let csv = include_bytes!("../fixtures/CMD_DB/valid.csv");
         let json = include_bytes!("../fixtures/CMD_DB/valid.json");
         let expected: model::Database = serde_json::from_slice(json).unwrap();
-        let mut rdr = csv::ReaderBuilder::new()
+        let rdr = csv::ReaderBuilder::new()
             .has_headers(false)
             .from_reader(csv.as_slice());
-        let mut iter = rdr.records();
+        let mut iter = PosStringRecordIterator::from_reader(rdr);
         let (_component, actual) = parse(&mut iter).unwrap();
         assert_eq!(expected, actual);
     }
