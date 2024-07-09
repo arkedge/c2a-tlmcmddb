@@ -65,7 +65,7 @@
 
 
 ## 自動コード生成
-- C2A のコードは [c2a-tlm-cmd-code-generator](https://github.com/ut-issl/c2a-tlm-cmd-code-generator) で自動生成できる．
+- C2A のコードは [c2a-code-generator](https://github.com/arkedge/c2a-core/tree/main/code-generator) で自動生成できる．
 
 
 ## その他の注意
