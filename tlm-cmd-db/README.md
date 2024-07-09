@@ -27,6 +27,7 @@
     - `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, `int32_t`, `float`, `double`, `raw` から選択可能
     - `Var. Type` が `raw` のときは必ず `raw` でなくてはならない．また，それ以外で `raw` を選択することは不可
   - `Pos. Designator`: パケット内のテレメトリの位置
+    - `Var. Type` が `raw` の場合，`bit Len.` は空白とする（実装上は Don't Care とする）
 - `Conversion Info.`: テレメトリ変換の情報
   - `Conv. Type`: 変換方式
     - `NONE`: 変換なし．`Var. Type` が `raw` のときは必ず `NONE` でなくてはならない
