@@ -1,4 +1,4 @@
-,Target,OBC,Local Var,,,,,,,,,,,,,,,,,
+v3,Target,OBC,Local Var,,,,,,,,,,,,,,,,,
 ,PacketID,0xf0,uint8_t temp = 10;##int hoge = 20;,,,,,,,,,,,,,,,,,
 ,Enable/Disable,ENABLE,,,,,,,,,,,,,,,,,,
 ,IsRestricted,FALSE,,,,,,,,,,,,,,,,,,
