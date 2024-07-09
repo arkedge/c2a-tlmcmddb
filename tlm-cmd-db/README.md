@@ -19,16 +19,19 @@
     - `.` で区切ることで階層を表現することが可能
 - `Onboard Software Info.`: C2A などの FSW 側の情報（自動コード生成に用いる）
   - `Var. Type`: テレメトリの型
+    - `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, `int32_t`, `float`, `double`, `raw` から選択可能
+    - `raw` は可変長バイナリデータを表す．テレメトリの末に 1 つだけ設定可能（テレメトリ長からデータ長を計算する）
   - `Variable or Function Name`: FSW 上での変数名やテレメトリを返す関数名
 - `Extraction Info.`: GS SW などでテレメトリを抽出するための情報
   - `Field Type`: GS の DB などに保存されるときの型． `Var. Type` と異なる型でも可能（おもにテレメ圧縮のときに有用）
+    - `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, `int32_t`, `float`, `double`, `raw` から選択可能
+    - `Var. Type` が `raw` のときは必ず `raw` でなくてはならない．また，それ以外で `raw` を選択することは不可
   - `Pos. Designator`: パケット内のテレメトリの位置
 - `Conversion Info.`: テレメトリ変換の情報
   - `Conv. Type`: 変換方式
-    - `NONE`: 変換なし
+    - `NONE`: 変換なし．`Var. Type` が `raw` のときは必ず `NONE` でなくてはならない
     - `POLY`: 多項式変換．変換後の型はすべて `double`
     - `STATUS`: ステータス変換
-    - `RAW`: 可変長バイナリデータ．テレメトリの末に 1 つだけ設定可能（テレメトリ長からデータ長を計算する）
     - `HEX`: 16進数変換（`Display Info.` の新設に伴い， deprecated）
 - `Display Info.`: GS SW などでテレメトリを表示するときの情報
   - `Label`: ラベル．UTF-8 で表現可能な文字列が可能．空欄の場合は `TLM Field` の `Name` が使われる．
