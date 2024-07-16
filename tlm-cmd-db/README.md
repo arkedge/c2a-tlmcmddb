@@ -17,17 +17,20 @@
   - `Name`: テレメトリのフィールド名．以下の要件を満たす
     - `[A-Z_][0-9A-Z_]*` を満たす文字列
     - `.` で区切ることで階層を表現することが可能
+      - 例: `OBC.GS_CMD.COUNTER`
+      - なお， `OBC.GS_CMD` と `OBC.GS_CMD.COUNTER` のようなフィールドの共存は不可（C2A 間通信における getter となる構造体の生成が不能になるため）
 - `Onboard Software Info.`: C2A などの FSW 側の情報（自動コード生成に用いる）
   - `Var. Type`: テレメトリの型
     - `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, `int32_t`, `float`, `double`, `raw` から選択可能
     - `raw` は可変長バイナリデータを表す．テレメトリの末に 1 つだけ設定可能（テレメトリ長からデータ長を計算する）
+      - ただし， C2A の Tlm Generator App が生成するテレメトリは， `raw` を利用してはならないことに注意（その他の user application の生成するテレメトリはこの限りではない）
   - `Variable or Function Name`: FSW 上での変数名やテレメトリを返す関数名
 - `Extraction Info.`: GS SW などでテレメトリを抽出するための情報
   - `Field Type`: GS の DB などに保存されるときの型． `Var. Type` と異なる型でも可能（おもにテレメ圧縮のときに有用）
     - `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, `int32_t`, `float`, `double`, `raw` から選択可能
     - `Var. Type` が `raw` のときは必ず `raw` でなくてはならない．また，それ以外で `raw` を選択することは不可
   - `Pos. Designator`: パケット内のテレメトリの位置
-    - `Var. Type` が `raw` の場合，`bit Len.` は空白とする（実装上は Don't Care とする）
+    - `Var. Type` が `raw` の場合，`bit Len.` は空白とする
 - `Conversion Info.`: テレメトリ変換の情報
   - `Conv. Type`: 変換方式
     - `NONE`: 変換なし．`Var. Type` が `raw` のときは必ず `NONE` でなくてはならない
