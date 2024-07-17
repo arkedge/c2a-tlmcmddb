@@ -15,9 +15,8 @@ pub struct Telemetry {
     /// このテレメトリ定義のメタデータ
     pub metadata: Metadata,
     /// このテレメトリの構造定義
-    /// blobが追加される前との互換性のため、entriesをaliasとする
-    #[serde(alias = "entries")]
-    pub content: Content,
+    /// Blobエントリーは高々1つしか存在せず、Blobエントリーより後ろにFieldGroupエントリーが存在してはならない
+    pub entries: Vec<Entry>,
 }
 
 /// テレメトリ定義のメタデータ
@@ -31,22 +30,13 @@ pub struct Metadata {
     pub local_variables: String,
 }
 
-/// バイト列を解釈しなblob tlmと、entryのリストとして解釈されるstruct tlmがある
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-/// blob が追加される前との互換性のため、untaggedとする
-#[serde(untagged)]
-pub enum Content {
-    /// このテレメトリはblobであり、構造をもたない
-    Blob,
-    /// このテレメトリ定義に含まれる [Entry] のリスト
-    Struct(Vec<Entry>),
-}
-
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE", tag = "type")]
 pub enum Entry {
     /// ビットフィールドの集合
     FieldGroup(FieldGroup),
+    /// blobエントリー
+    BlobEntry(BlobEntry),
     /// コメント行
     Comment(Comment),
 }
@@ -227,6 +217,12 @@ pub struct DisplayInfo {
     pub unit: String,
     /// フォーマットの指定
     pub format: String,
+}
+
+/// Blobエントリー
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct BlobEntry {
+    pub name: String,
 }
 
 /// コメント行
