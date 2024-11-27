@@ -13,6 +13,8 @@ permissions:
 
 env:
   CARGO_INCREMENTAL: 0
+  # renovate: datasource=github-releases depName=EmbarkStudios/cargo-about
+  CARGO_ABOUT_VERSION: 0.6.4
 
 jobs:
   rust:
@@ -35,6 +37,10 @@ jobs:
 
       - name: cache dependencies
         uses: Swatinem/rust-cache@v2.7.5
+
+      - name: install cargo-about
+        run: |
+          cargo install cargo-about --locked --version ${{ env.CARGO_ABOUT_VERSION }}
 
       - name: reviewdog / clippy
         if: github.event_name == 'pull_request'
