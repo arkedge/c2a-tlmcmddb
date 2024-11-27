@@ -4,6 +4,7 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 readme = "README.md"
 
 [workspace]
+resolver = "2"
 
 members = [
   "tlmcmddb",
