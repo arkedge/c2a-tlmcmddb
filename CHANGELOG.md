@@ -10,7 +10,7 @@
 - [#41](https://github.com/arkedge/c2a-tlmcmddb/pull/41): モデルにDisplayInfoを追加する
 - [#24](https://github.com/arkedge/c2a-tlmcmddb/pull/24): tlmcmddbのモデルをblobに対応させる
 - [#84](https://github.com/arkedge/c2a-tlmcmddb/pull/84): tlmcmddb-cli: Introduce notalawyer to embed license notice into binary
-- [#89](https://github.com/arkedge/c2a-tlmcmddb/pull/89):  Add release automation workflow for binary distribution
+- [#89](https://github.com/arkedge/c2a-tlmcmddb/pull/89): Add release automation workflow for binary distribution
 
 ### Documentation
 
@@ -47,10 +47,11 @@
 - [#79](https://github.com/arkedge/c2a-tlmcmddb/pull/79): chore(deps): update rust crate serde_json to v1.0.133
 - [#80](https://github.com/arkedge/c2a-tlmcmddb/pull/80): fix(deps): update rust crate anyhow to v1.0.93
 - [#81](https://github.com/arkedge/c2a-tlmcmddb/pull/81): fix(deps): update rust crate csv to v1.3.1
-- [#85](https://github.com/arkedge/c2a-tlmcmddb/pull/85):  Use Renovate Shareable config presets
+- [#85](https://github.com/arkedge/c2a-tlmcmddb/pull/85): Use Renovate Shareable config presets
 - [#88](https://github.com/arkedge/c2a-tlmcmddb/pull/88): Update Rust version to 1.74
 - [#90](https://github.com/arkedge/c2a-tlmcmddb/pull/90): Merge internal dependencies into workspace
 - [#91](https://github.com/arkedge/c2a-tlmcmddb/pull/91): Release 2.6.0-beta.1
+- [#92](https://github.com/arkedge/c2a-tlmcmddb/pull/92): Release aarch64-unknown-linux-musl binaries
 - [#94](https://github.com/arkedge/c2a-tlmcmddb/pull/94): Release 2.6.0
 
 ## 2.5.1 (2023-12-22)
