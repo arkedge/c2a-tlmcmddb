@@ -1,3 +1,7 @@
 [patch.crates-io]
 tlmcmddb = { path = "./tlmcmddb" }
 tlmcmddb-csv = { path = "./tlmcmddb-csv" }
+
+# cross compile
+[target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-gnu-gcc"
