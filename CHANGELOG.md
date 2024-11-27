@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## 2.6.0 (2024-11-28)
+
+### Added
+- [#41](https://github.com/arkedge/c2a-tlmcmddb/pull/41): モデルにDisplayInfoを追加する
+- [#24](https://github.com/arkedge/c2a-tlmcmddb/pull/24): tlmcmddbのモデルをblobに対応させる
+- [#84](https://github.com/arkedge/c2a-tlmcmddb/pull/84): tlmcmddb-cli: Introduce notalawyer to embed license notice into binary
+- [#89](https://github.com/arkedge/c2a-tlmcmddb/pull/89):  Add release automation workflow for binary distribution
+
+### Documentation
+
+- [#93](https://github.com/arkedge/c2a-tlmcmddb/pull/93): Add 2.6 CHANGELOG
+
+### Internal
+
+- [#43](https://github.com/arkedge/c2a-tlmcmddb/pull/43): chore(deps): update sksat/action-clippy action to v0.5.0
+- [#44](https://github.com/arkedge/c2a-tlmcmddb/pull/44): chore(deps): update sksat/action-clippy action to v0.6.0
+- [#47](https://github.com/arkedge/c2a-tlmcmddb/pull/47): chore(deps): update sksat/action-clippy action to v0.7.0
+- [#48](https://github.com/arkedge/c2a-tlmcmddb/pull/48): Switch clippy action reviewdog reporter on push
+- [#45](https://github.com/arkedge/c2a-tlmcmddb/pull/45): chore(deps): update reviewdog/action-actionlint action to v1.41.0
+- [#40](https://github.com/arkedge/c2a-tlmcmddb/pull/40): chore(deps): update swatinem/rust-cache action to v2.7.3
+- [#46](https://github.com/arkedge/c2a-tlmcmddb/pull/46): chore(deps): update actions/setup-node action to v4.0.2
+- [#50](https://github.com/arkedge/c2a-tlmcmddb/pull/50): Clippyの警告に対処
+- [#51](https://github.com/arkedge/c2a-tlmcmddb/pull/51): コンパイルエラー修正
+- [#52](https://github.com/arkedge/c2a-tlmcmddb/pull/52): chore(deps): update reviewdog/action-actionlint action to v1.43.0
+- [#57](https://github.com/arkedge/c2a-tlmcmddb/pull/57): chore(deps): update actions/checkout action to v4.1.3
+- [#55](https://github.com/arkedge/c2a-tlmcmddb/pull/55): chore(deps): update reviewdog/action-actionlint action to v1.44.0
+- [#49](https://github.com/arkedge/c2a-tlmcmddb/pull/49): chore(deps): update sksat/action-clippy action to v0.7.1
+- [#39](https://github.com/arkedge/c2a-tlmcmddb/pull/39): fix(deps): update rust crate serde to 1.0.198
+- [#58](https://github.com/arkedge/c2a-tlmcmddb/pull/58): chore(deps): update actions/checkout action to v4.1.4
+- [#64](https://github.com/arkedge/c2a-tlmcmddb/pull/64): chore(deps): update reviewdog/action-actionlint action to v1.45.0
+- [#71](https://github.com/arkedge/c2a-tlmcmddb/pull/71): chore(deps): update sksat/action-clippy action to v1
+- [#69](https://github.com/arkedge/c2a-tlmcmddb/pull/69): chore(deps): update reviewdog/action-actionlint action to v1.53.0
+- [#73](https://github.com/arkedge/c2a-tlmcmddb/pull/73): chore(deps): update actions/setup-node action to v4.0.3
+- [#68](https://github.com/arkedge/c2a-tlmcmddb/pull/68): chore(deps): update actions/checkout action to v4.2.2
+- [#75](https://github.com/arkedge/c2a-tlmcmddb/pull/75): chore(deps): update actions/setup-node action to v4.1.0
+- [#77](https://github.com/arkedge/c2a-tlmcmddb/pull/77): chore(deps): update sksat/action-clippy action to v1.1.0
+- [#74](https://github.com/arkedge/c2a-tlmcmddb/pull/74): chore(deps): update reviewdog/action-actionlint action to v1.57.0
+- [#76](https://github.com/arkedge/c2a-tlmcmddb/pull/76): chore(deps): update dependency ubuntu to v24
+- [#78](https://github.com/arkedge/c2a-tlmcmddb/pull/78): chore(deps): update swatinem/rust-cache action to v2.7.5
+- [#82](https://github.com/arkedge/c2a-tlmcmddb/pull/82): fix(deps): update rust crate serde to v1.0.215
+- [#79](https://github.com/arkedge/c2a-tlmcmddb/pull/79): chore(deps): update rust crate serde_json to v1.0.133
+- [#80](https://github.com/arkedge/c2a-tlmcmddb/pull/80): fix(deps): update rust crate anyhow to v1.0.93
+- [#81](https://github.com/arkedge/c2a-tlmcmddb/pull/81): fix(deps): update rust crate csv to v1.3.1
+- [#85](https://github.com/arkedge/c2a-tlmcmddb/pull/85):  Use Renovate Shareable config presets
+- [#88](https://github.com/arkedge/c2a-tlmcmddb/pull/88): Update Rust version to 1.74
+- [#90](https://github.com/arkedge/c2a-tlmcmddb/pull/90): Merge internal dependencies into workspace
+- [#91](https://github.com/arkedge/c2a-tlmcmddb/pull/91): Release 2.6.0-beta.1
+
 ## 2.5.1 (2023-12-22)
 
 ### Internal
