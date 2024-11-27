@@ -1,0 +1,129 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags: ['v*']
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/release.yml
+
+env:
+  # renovate: datasource=github-releases depName=EmbarkStudios/cargo-about
+  CARGO_ABOUT_VERSION: 0.6.4
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: true
+      matrix:
+        target:
+          - x86_64-unknown-linux-musl
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: install apt depenedencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y musl-tools
+
+      - name: Get Rust toolchain
+        id: toolchain
+        working-directory: .
+        run: |
+          awk -F'[ ="]+' '$1 == "channel" { print "toolchain=" $2 }' rust-toolchain >> "$GITHUB_OUTPUT"
+
+      - uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ steps.toolchain.outputs.toolchain }}
+          targets: ${{ matrix.target }}
+
+      - uses: Swatinem/rust-cache@v2.7.5
+
+      - name: install cargo-about
+        run: |
+          cargo install --locked cargo-about --version ${{ env.CARGO_ABOUT_VERSION }}
+
+      - name: Build
+        run: |
+          cargo build --target=${{ matrix.target }} --release --locked
+
+      - name: Rename binaries
+        run: |
+          mkdir bin
+          cp "./target/${{ matrix.target }}/release/tlmcmddb-cli" "./bin/tlmcmddb-cli-${{ matrix.target }}"
+          ls -lh ./bin
+
+      - uses: actions/upload-artifact@v4.4.3
+        with:
+          name: release-executable-${{ matrix.target }}
+          if-no-files-found: error
+          path: ./bin/
+
+  publish_dry_run:
+    name: publish (dry-run)
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Get Rust toolchain
+        id: toolchain
+        working-directory: .
+        run: |
+          awk -F'[ ="]+' '$1 == "channel" { print "toolchain=" $2 }' rust-toolchain >> "$GITHUB_OUTPUT"
+
+      - uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: ${{ steps.toolchain.outputs.toolchain }}
+
+      - uses: Swatinem/rust-cache@v2.7.5
+
+      - name: install cargo-about
+        run: |
+          cargo install --locked cargo-about --version ${{ env.CARGO_ABOUT_VERSION }}
+
+      - name: cargo publish (dry-run)
+        run: |
+          crates=("tlmcmddb" "tlmcmddb-csv" "tlmcmddb-cli")
+          for c in "${crates[@]}" ; do
+            cargo publish --dry-run -p "${c}"
+
+            echo ""
+            # shellcheck disable=SC2086
+            ls -lh ./target/package/${c}-*/
+          done
+          ls -lh ./target/package
+
+  release:
+    name: Release
+    needs: [ build, publish_dry_run ]
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/download-artifact@v4.1.8
+        with:
+          pattern: release-executable-*
+          merge-multiple: true
+
+      - run: chmod +x tlmcmddb-*
+
+      - run: ls -lh
+
+      - name: Release to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2.1.0
+        with:
+          draft: true
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          files: |
+            tlmcmddb*
