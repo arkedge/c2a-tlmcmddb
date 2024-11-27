@@ -7,6 +7,7 @@ use std::{
 
 use anyhow::{anyhow, Context, Result};
 use clap::{Parser, Subcommand};
+use notalawyer_clap::*;
 use tlmcmddb::Database;
 
 #[derive(Parser)]
@@ -135,7 +136,7 @@ impl DatabaseSet {
 }
 
 fn main() -> Result<()> {
-    let cli = Cli::parse();
+    let cli = Cli::parse_with_license_notice(include_notice!());
     match cli.command {
         Command::Bundle {
             tlm_db_dir,
