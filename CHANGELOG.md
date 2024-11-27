@@ -51,6 +51,7 @@
 - [#88](https://github.com/arkedge/c2a-tlmcmddb/pull/88): Update Rust version to 1.74
 - [#90](https://github.com/arkedge/c2a-tlmcmddb/pull/90): Merge internal dependencies into workspace
 - [#91](https://github.com/arkedge/c2a-tlmcmddb/pull/91): Release 2.6.0-beta.1
+- [#92](https://github.com/arkedge/c2a-tlmcmddb/pull/92): Release aarch64-unknown-linux-musl binaries
 - [#94](https://github.com/arkedge/c2a-tlmcmddb/pull/94): Release 2.6.0
 
 ## 2.5.1 (2023-12-22)
