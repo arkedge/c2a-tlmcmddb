@@ -4,9 +4,14 @@ repository = "https://github.com/arkedge/c2a-tlmcmddb"
 readme = "README.md"
 
 [workspace]
+resolver = "2"
 
 members = [
   "tlmcmddb",
   "tlmcmddb-csv",
   "tlmcmddb-cli",
 ]
+
+[workspace.dependencies]
+tlmcmddb = "2.5"
+tlmcmddb-csv = "2.5"
