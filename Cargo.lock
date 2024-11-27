@@ -319,14 +319,14 @@ dependencies = [
 
 [[package]]
 name = "tlmcmddb"
-version = "2.5.1"
+version = "2.6.0-beta.1"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "tlmcmddb-cli"
-version = "2.5.1"
+version = "2.6.0-beta.1"
 dependencies = [
  "anyhow",
  "clap",
@@ -339,7 +339,7 @@ dependencies = [
 
 [[package]]
 name = "tlmcmddb-csv"
-version = "2.5.1"
+version = "2.6.0-beta.1"
 dependencies = [
  "anyhow",
  "csv",
