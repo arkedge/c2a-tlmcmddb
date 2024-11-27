@@ -2,6 +2,10 @@
 
 ## 2.6.0 (2024-11-28)
 
+- Start distribute tlmcmddb-cli binary on [GitHub Releases](https://github.com/arkedge/c2a-tlmcmddb/releases/tag/v2.6.0)
+  - It can be install with [cargo-binstall](https://github.com/cargo-bins/cargo-binstall)
+  - ex: `cargo binstall tlmcmddb-cli`
+
 ### Added
 - [#41](https://github.com/arkedge/c2a-tlmcmddb/pull/41): モデルにDisplayInfoを追加する
 - [#24](https://github.com/arkedge/c2a-tlmcmddb/pull/24): tlmcmddbのモデルをblobに対応させる
@@ -47,6 +51,7 @@
 - [#88](https://github.com/arkedge/c2a-tlmcmddb/pull/88): Update Rust version to 1.74
 - [#90](https://github.com/arkedge/c2a-tlmcmddb/pull/90): Merge internal dependencies into workspace
 - [#91](https://github.com/arkedge/c2a-tlmcmddb/pull/91): Release 2.6.0-beta.1
+- [#94](https://github.com/arkedge/c2a-tlmcmddb/pull/94): Release 2.6.0
 
 ## 2.5.1 (2023-12-22)
 
