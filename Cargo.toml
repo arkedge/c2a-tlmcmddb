@@ -1,5 +1,5 @@
 [workspace.package]
-version = "2.6.0-beta.1"
+version = "2.6.0"
 repository = "https://github.com/arkedge/c2a-tlmcmddb"
 readme = "README.md"
 
@@ -13,5 +13,5 @@ members = [
 ]
 
 [workspace.dependencies]
-tlmcmddb = "2.6.0-beta.1"
-tlmcmddb-csv = "2.6.0-beta.1"
+tlmcmddb = "2.6"
+tlmcmddb-csv = "2.6"
