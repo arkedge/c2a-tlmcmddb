@@ -10,3 +10,7 @@ members = [
   "tlmcmddb-csv",
   "tlmcmddb-cli",
 ]
+
+[workspace.dependencies]
+tlmcmddb = "2.5"
+tlmcmddb-csv = "2.5"
