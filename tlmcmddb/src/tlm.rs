@@ -81,7 +81,8 @@ pub struct Field {
     pub conversion_info: ConversionInfo,
     /// GS SW などでテレメトリを表示するときの情報
     #[serde(default)]
-    pub display_info: DisplayInfo,
+    #[serde(skip_serializing_if = "Option::is_none")] // serialize v2 compatible if None
+    pub display_info: Option<DisplayInfo>,
     /// このフィールドの説明（衛星運用者向け）
     pub description: String,
     /// このフィールドの説明（衛星開発者向け）
