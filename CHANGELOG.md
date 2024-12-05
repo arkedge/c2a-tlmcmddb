@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.6.0 (2024-11-28)
+## [yanked] 2.6.0 (2024-11-28)
 
 - Start distribute tlmcmddb-cli binary on [GitHub Releases](https://github.com/arkedge/c2a-tlmcmddb/releases/tag/v2.6.0)
   - It can be install with [cargo-binstall](https://github.com/cargo-bins/cargo-binstall)
