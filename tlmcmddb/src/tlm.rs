@@ -15,8 +15,8 @@ pub struct Telemetry {
     /// このテレメトリ定義のメタデータ
     pub metadata: Metadata,
     /// このテレメトリの構造定義
-    /// blobが追加される前との互換性のため、entriesをaliasとする
-    #[serde(alias = "entries")]
+    /// blobが追加される前との互換性のため、entriesに rename する
+    #[serde(rename = "entries")]
     pub content: Content,
 }
 
