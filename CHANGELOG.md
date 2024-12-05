@@ -1,6 +1,15 @@
 # CHANGELOG
 
-## 2.6.0 (2024-11-28)
+## 2.6.1 (2024-12-05)
+
+### Internal
+- [#103](https://github.com/arkedge/c2a-tlmcmddb/pull/103): Release 2.6.1
+
+### Fixed
+- [#101](https://github.com/arkedge/c2a-tlmcmddb/pull/101): Set telemetry content field name with serde(rename) for serializer compatibility
+- [#102](https://github.com/arkedge/c2a-tlmcmddb/pull/102): Skip display_info serialize if None for v2 JSON compatibility
+
+## [yanked] 2.6.0 (2024-11-28)
 
 - Start distribute tlmcmddb-cli binary on [GitHub Releases](https://github.com/arkedge/c2a-tlmcmddb/releases/tag/v2.6.0)
   - It can be install with [cargo-binstall](https://github.com/cargo-bins/cargo-binstall)
