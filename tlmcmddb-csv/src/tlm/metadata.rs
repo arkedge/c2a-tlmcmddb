@@ -2,7 +2,7 @@ use anyhow::{anyhow, ensure, Context, Result};
 use csv::StringRecord;
 use tlmcmddb::tlm as model;
 
-use crate::{escape::unescape, macros::check_header, util};
+use crate::{escape::unescape, macros::check_header, util, PosStringRecord};
 
 /*
 +---+-----------------+---------+-------------------+
@@ -82,13 +82,13 @@ fn parse_fourth_line(record: StringRecord) -> Result<bool> {
 
 pub fn parse<I, E>(mut iter: I) -> Result<model::Metadata>
 where
-    I: Iterator<Item = Result<StringRecord, E>>,
+    I: Iterator<Item = Result<PosStringRecord, E>>,
     E: std::error::Error + Send + Sync + 'static,
 {
-    let target = parse_first_line(util::next_record(&mut iter)?)?;
-    let (packet_id, local_variables) = parse_second_line(util::next_record(&mut iter)?)?;
-    let is_enabled = parse_third_line(util::next_record(&mut iter)?)?;
-    let is_restricted = parse_fourth_line(util::next_record(&mut iter)?)?;
+    let target = parse_first_line(util::next_record(&mut iter)?.record)?;
+    let (packet_id, local_variables) = parse_second_line(util::next_record(&mut iter)?.record)?;
+    let is_enabled = parse_third_line(util::next_record(&mut iter)?.record)?;
+    let is_restricted = parse_fourth_line(util::next_record(&mut iter)?.record)?;
     let _padding_line = util::next_record(&mut iter)?;
     Ok(model::Metadata {
         target,
@@ -102,14 +102,15 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::PosStringRecordIterator;
 
     #[test]
     fn test() {
         let csv = include_bytes!("../../fixtures/TLM_DB/valid_metadata.csv");
-        let mut rdr = csv::ReaderBuilder::new()
+        let rdr = csv::ReaderBuilder::new()
             .has_headers(false)
             .from_reader(csv.as_slice());
-        let mut iter = rdr.records();
+        let mut iter = PosStringRecordIterator::from_reader(rdr);
         let metadata = parse(&mut iter).unwrap();
         assert_eq!("OBC", metadata.target);
         assert_eq!(0xf0, metadata.packet_id);

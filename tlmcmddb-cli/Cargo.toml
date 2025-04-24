@@ -15,7 +15,7 @@ notalawyer-build = "0.2"
 [dependencies]
 anyhow = { version = "1", features = ["backtrace"] }
 clap = { version = "4.4.11", features = ["derive"] }
-tlmcmddb.workspace = true
-tlmcmddb-csv.workspace = true
+tlmcmddb = { path = "../tlmcmddb" }
+tlmcmddb-csv = { path = "../tlmcmddb-csv" }
 serde_json = "1"
 notalawyer-clap = "0.2"
