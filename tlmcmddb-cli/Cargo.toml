@@ -9,13 +9,9 @@ readme.workspace = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[build-dependencies]
-notalawyer-build = "0.2"
-
 [dependencies]
 anyhow = { version = "1", features = ["backtrace"] }
 clap = { version = "4.4.11", features = ["derive"] }
-tlmcmddb.workspace = true
-tlmcmddb-csv.workspace = true
+tlmcmddb = "2.5"
+tlmcmddb-csv = "2.5"
 serde_json = "1"
-notalawyer-clap = "0.2"
