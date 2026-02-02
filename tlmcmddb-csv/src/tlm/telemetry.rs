@@ -14,6 +14,6 @@ where
     Ok(model::Telemetry {
         name: telemetry_name,
         metadata,
-        content: model::Content::Struct(entries),
+        entries,
     })
 }
